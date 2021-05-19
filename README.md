@@ -10,7 +10,7 @@ DecibelSDK is available on Cocoapods master repo.
 To access the framework in the repository, add the following lines to your Podfile:
 
 ```Ruby
-source 'https://github.com/DecibelSDK/Specs.git'
+source 'https://github.com/DecibelInsight/decibel-sdk-ios-core.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
 target 'my-target' do
