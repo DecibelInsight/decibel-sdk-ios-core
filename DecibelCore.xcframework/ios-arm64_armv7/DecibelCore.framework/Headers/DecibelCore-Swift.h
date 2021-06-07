@@ -509,6 +509,10 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 /// \param selector The component that fails.
 ///
 - (void)formErrorWithError:(NSString * _Nonnull)error selector:(UIView * _Nullable)selector;
+/// Method to change the settings for sending the data.
+/// \param enabled parameter that enables or disables send data over mobile data.
+///
+- (void)useMobileData:(BOOL)enabled;
 @end
 
 
@@ -1058,6 +1062,10 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 /// \param selector The component that fails.
 ///
 - (void)formErrorWithError:(NSString * _Nonnull)error selector:(UIView * _Nullable)selector;
+/// Method to change the settings for sending the data.
+/// \param enabled parameter that enables or disables send data over mobile data.
+///
+- (void)useMobileData:(BOOL)enabled;
 @end
 
 

@@ -70,6 +70,7 @@ extension NSManagedObject {
   @objc func setLogLevel(_ level: DecibelCore.DecibelLogLevelType)
   @objc func formSuccess()
   @objc func formError(error: Swift.String, selector: UIKit.UIView?)
+  @objc func useMobileData(_ enabled: Swift.Bool)
 }
 @_inheritsConvenienceInitializers @objc public class DecibelSDK : ObjectiveC.NSObject {
   @objc public static let shared: DecibelCore.DecibelProtocol
