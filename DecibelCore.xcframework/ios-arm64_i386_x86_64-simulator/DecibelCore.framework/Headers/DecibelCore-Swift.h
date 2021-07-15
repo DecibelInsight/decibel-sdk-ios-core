@@ -211,14 +211,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
-typedef SWIFT_ENUM(NSInteger, DecibelConfigurationMask, open) {
-  DecibelConfigurationMaskLabels = 0,
-  DecibelConfigurationMaskInputs = 1,
-  DecibelConfigurationMaskImages = 2,
-  DecibelConfigurationMaskAll = 3,
-  DecibelConfigurationMaskNoMask = 4,
-};
-
 typedef SWIFT_ENUM(NSInteger, DecibelCurrency, open) {
   DecibelCurrencyAED = 0,
   DecibelCurrencyAFN = 1,
@@ -403,17 +395,8 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelDelegate_")
 - (void)getSessionURL:(NSString * _Nonnull)sessionUrl;
 @end
 
-typedef SWIFT_ENUM(NSInteger, DecibelLogLevelType, open) {
-  DecibelLogLevelTypeNone = 0,
-  DecibelLogLevelTypeInfo = 1,
-};
-
-typedef SWIFT_ENUM(NSInteger, DecibelMaskingView, open) {
-  DecibelMaskingViewAutomatic = 0,
-  DecibelMaskingViewMask = 1,
-  DecibelMaskingViewUnmask = 2,
-};
-
+enum SDKMaskAutomatic : NSInteger;
+enum SDKLogLevel : NSInteger;
 @class UIView;
 
 SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
@@ -442,7 +425,7 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 /// This method set masking for the current screen.
 /// \param mask Automatic configuration of component mask.
 ///
-- (void)setMaskingForCurrentScreenWithMask:(enum DecibelConfigurationMask)mask;
+- (void)setMaskingForCurrentScreenWithMask:(enum SDKMaskAutomatic)mask;
 /// This method sends any goal defined by the user.
 /// \param goal The name of the goal.
 ///
@@ -462,17 +445,17 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 ///
 - (void)sendWithGoal:(NSString * _Nonnull)goal;
 /// This method sends any dimension defined by the user.
-/// \param dimension The name of thedimension.
+/// \param dimension The name of the dimension.
 ///
 /// \param value The value specifies of the dimension.
 ///
 - (void)sendWithDimension:(NSString * _Nonnull)dimension withString:(NSString * _Nonnull)value;
-/// \param dimension The name of thedimension.
+/// \param dimension The name of the dimension.
 ///
 /// \param value The value specifies of the dimension.
 ///
 - (void)sendWithDimension:(NSString * _Nonnull)dimension withBool:(BOOL)value;
-/// \param dimension The name of thedimension.
+/// \param dimension The name of the dimension.
 ///
 /// \param value The value specifies of the dimension.
 ///
@@ -484,7 +467,7 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 /// Settings to mask all visual components that are selected throughout the application.
 /// \param configuration type of masking selected.
 ///
-- (void)setAutomaticMask:(enum DecibelConfigurationMask)configuration;
+- (void)setAutomaticMask:(enum SDKMaskAutomatic)configuration;
 /// Method to mask a CGRect.
 /// \param rect CGRect that you want to mask.
 ///
@@ -500,7 +483,7 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 /// Method set the log level.
 /// \param level DecibelLogLevelType that you want to set.
 ///
-- (void)setLogLevel:(enum DecibelLogLevelType)level;
+- (void)setLogLevel:(enum SDKLogLevel)level;
 /// Method to send the correct submission of the form.
 - (void)formSuccess;
 /// Method to submit an error in the form.
@@ -509,17 +492,16 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 /// \param selector The component that fails.
 ///
 - (void)formErrorWithError:(NSString * _Nonnull)error selector:(UIView * _Nullable)selector;
-/// Method to change the settings for sending the data.
-/// \param enabled parameter that enables or disables send data over mobile data.
-///
-- (void)useMobileData:(BOOL)enabled;
 @end
 
+@protocol SDKSettings;
 
 SWIFT_CLASS("_TtC11DecibelCore10DecibelSDK")
 @interface DecibelSDK : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) id <DecibelProtocol> _Nonnull shared;)
 + (id <DecibelProtocol> _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) id <SDKSettings> _Nonnull settings;)
++ (id <SDKSettings> _Nonnull)settings SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -533,6 +515,45 @@ typedef SWIFT_ENUM(NSInteger, DecibelUserConsent, open) {
 
 
 
+typedef SWIFT_ENUM(NSInteger, SDKLogLevel, open) {
+  SDKLogLevelNone = 0,
+  SDKLogLevelInfo = 1,
+};
+
+typedef SWIFT_ENUM(NSInteger, SDKMaskAutomatic, open) {
+  SDKMaskAutomaticLabels = 0,
+  SDKMaskAutomaticInputs = 1,
+  SDKMaskAutomaticImages = 2,
+  SDKMaskAutomaticWebViews = 3,
+  SDKMaskAutomaticAll = 4,
+  SDKMaskAutomaticNoMask = 5,
+};
+
+typedef SWIFT_ENUM(NSInteger, SDKMaskFidelity, open) {
+  SDKMaskFidelityHigh = 0,
+  SDKMaskFidelityLow = 1,
+};
+
+typedef SWIFT_ENUM(NSInteger, SDKMaskView, open) {
+  SDKMaskViewAutomatic = 0,
+  SDKMaskViewMask = 1,
+  SDKMaskViewUnmask = 2,
+};
+
+
+SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
+@protocol SDKSettings
+/// Property to change the settings for sending the data. With a true value, the data is sent both by
+/// Wi-Fi and mobile data.
+@property (nonatomic) BOOL mobileDataEnable;
+/// Define the masking behaviour with two possible values <code>.low</code>, <code>.high</code>.
+/// note:
+/// <code>.low</code> The video collects more frames, but in some cases the masking may not be perfect.
+/// note:
+/// <code>.high</code> The video quality may be bad in some cases, but the masking would be very reliable.
+@property (nonatomic) enum SDKMaskFidelity maskingFidelity;
+@end
+
 
 
 
@@ -541,7 +562,7 @@ typedef SWIFT_ENUM(NSInteger, DecibelUserConsent, open) {
 
 
 @interface UIView (SWIFT_EXTENSION(DecibelCore))
-@property (nonatomic) enum DecibelMaskingView diMasking;
+@property (nonatomic) enum SDKMaskView diMasking;
 @end
 
 
@@ -764,14 +785,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
-typedef SWIFT_ENUM(NSInteger, DecibelConfigurationMask, open) {
-  DecibelConfigurationMaskLabels = 0,
-  DecibelConfigurationMaskInputs = 1,
-  DecibelConfigurationMaskImages = 2,
-  DecibelConfigurationMaskAll = 3,
-  DecibelConfigurationMaskNoMask = 4,
-};
-
 typedef SWIFT_ENUM(NSInteger, DecibelCurrency, open) {
   DecibelCurrencyAED = 0,
   DecibelCurrencyAFN = 1,
@@ -956,17 +969,8 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelDelegate_")
 - (void)getSessionURL:(NSString * _Nonnull)sessionUrl;
 @end
 
-typedef SWIFT_ENUM(NSInteger, DecibelLogLevelType, open) {
-  DecibelLogLevelTypeNone = 0,
-  DecibelLogLevelTypeInfo = 1,
-};
-
-typedef SWIFT_ENUM(NSInteger, DecibelMaskingView, open) {
-  DecibelMaskingViewAutomatic = 0,
-  DecibelMaskingViewMask = 1,
-  DecibelMaskingViewUnmask = 2,
-};
-
+enum SDKMaskAutomatic : NSInteger;
+enum SDKLogLevel : NSInteger;
 @class UIView;
 
 SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
@@ -995,7 +999,7 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 /// This method set masking for the current screen.
 /// \param mask Automatic configuration of component mask.
 ///
-- (void)setMaskingForCurrentScreenWithMask:(enum DecibelConfigurationMask)mask;
+- (void)setMaskingForCurrentScreenWithMask:(enum SDKMaskAutomatic)mask;
 /// This method sends any goal defined by the user.
 /// \param goal The name of the goal.
 ///
@@ -1015,17 +1019,17 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 ///
 - (void)sendWithGoal:(NSString * _Nonnull)goal;
 /// This method sends any dimension defined by the user.
-/// \param dimension The name of thedimension.
+/// \param dimension The name of the dimension.
 ///
 /// \param value The value specifies of the dimension.
 ///
 - (void)sendWithDimension:(NSString * _Nonnull)dimension withString:(NSString * _Nonnull)value;
-/// \param dimension The name of thedimension.
+/// \param dimension The name of the dimension.
 ///
 /// \param value The value specifies of the dimension.
 ///
 - (void)sendWithDimension:(NSString * _Nonnull)dimension withBool:(BOOL)value;
-/// \param dimension The name of thedimension.
+/// \param dimension The name of the dimension.
 ///
 /// \param value The value specifies of the dimension.
 ///
@@ -1037,7 +1041,7 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 /// Settings to mask all visual components that are selected throughout the application.
 /// \param configuration type of masking selected.
 ///
-- (void)setAutomaticMask:(enum DecibelConfigurationMask)configuration;
+- (void)setAutomaticMask:(enum SDKMaskAutomatic)configuration;
 /// Method to mask a CGRect.
 /// \param rect CGRect that you want to mask.
 ///
@@ -1053,7 +1057,7 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 /// Method set the log level.
 /// \param level DecibelLogLevelType that you want to set.
 ///
-- (void)setLogLevel:(enum DecibelLogLevelType)level;
+- (void)setLogLevel:(enum SDKLogLevel)level;
 /// Method to send the correct submission of the form.
 - (void)formSuccess;
 /// Method to submit an error in the form.
@@ -1062,17 +1066,16 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 /// \param selector The component that fails.
 ///
 - (void)formErrorWithError:(NSString * _Nonnull)error selector:(UIView * _Nullable)selector;
-/// Method to change the settings for sending the data.
-/// \param enabled parameter that enables or disables send data over mobile data.
-///
-- (void)useMobileData:(BOOL)enabled;
 @end
 
+@protocol SDKSettings;
 
 SWIFT_CLASS("_TtC11DecibelCore10DecibelSDK")
 @interface DecibelSDK : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) id <DecibelProtocol> _Nonnull shared;)
 + (id <DecibelProtocol> _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) id <SDKSettings> _Nonnull settings;)
++ (id <SDKSettings> _Nonnull)settings SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -1086,6 +1089,45 @@ typedef SWIFT_ENUM(NSInteger, DecibelUserConsent, open) {
 
 
 
+typedef SWIFT_ENUM(NSInteger, SDKLogLevel, open) {
+  SDKLogLevelNone = 0,
+  SDKLogLevelInfo = 1,
+};
+
+typedef SWIFT_ENUM(NSInteger, SDKMaskAutomatic, open) {
+  SDKMaskAutomaticLabels = 0,
+  SDKMaskAutomaticInputs = 1,
+  SDKMaskAutomaticImages = 2,
+  SDKMaskAutomaticWebViews = 3,
+  SDKMaskAutomaticAll = 4,
+  SDKMaskAutomaticNoMask = 5,
+};
+
+typedef SWIFT_ENUM(NSInteger, SDKMaskFidelity, open) {
+  SDKMaskFidelityHigh = 0,
+  SDKMaskFidelityLow = 1,
+};
+
+typedef SWIFT_ENUM(NSInteger, SDKMaskView, open) {
+  SDKMaskViewAutomatic = 0,
+  SDKMaskViewMask = 1,
+  SDKMaskViewUnmask = 2,
+};
+
+
+SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
+@protocol SDKSettings
+/// Property to change the settings for sending the data. With a true value, the data is sent both by
+/// Wi-Fi and mobile data.
+@property (nonatomic) BOOL mobileDataEnable;
+/// Define the masking behaviour with two possible values <code>.low</code>, <code>.high</code>.
+/// note:
+/// <code>.low</code> The video collects more frames, but in some cases the masking may not be perfect.
+/// note:
+/// <code>.high</code> The video quality may be bad in some cases, but the masking would be very reliable.
+@property (nonatomic) enum SDKMaskFidelity maskingFidelity;
+@end
+
 
 
 
@@ -1094,7 +1136,7 @@ typedef SWIFT_ENUM(NSInteger, DecibelUserConsent, open) {
 
 
 @interface UIView (SWIFT_EXTENSION(DecibelCore))
-@property (nonatomic) enum DecibelMaskingView diMasking;
+@property (nonatomic) enum SDKMaskView diMasking;
 @end
 
 
@@ -1317,14 +1359,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
-typedef SWIFT_ENUM(NSInteger, DecibelConfigurationMask, open) {
-  DecibelConfigurationMaskLabels = 0,
-  DecibelConfigurationMaskInputs = 1,
-  DecibelConfigurationMaskImages = 2,
-  DecibelConfigurationMaskAll = 3,
-  DecibelConfigurationMaskNoMask = 4,
-};
-
 typedef SWIFT_ENUM(NSInteger, DecibelCurrency, open) {
   DecibelCurrencyAED = 0,
   DecibelCurrencyAFN = 1,
@@ -1509,17 +1543,8 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelDelegate_")
 - (void)getSessionURL:(NSString * _Nonnull)sessionUrl;
 @end
 
-typedef SWIFT_ENUM(NSInteger, DecibelLogLevelType, open) {
-  DecibelLogLevelTypeNone = 0,
-  DecibelLogLevelTypeInfo = 1,
-};
-
-typedef SWIFT_ENUM(NSInteger, DecibelMaskingView, open) {
-  DecibelMaskingViewAutomatic = 0,
-  DecibelMaskingViewMask = 1,
-  DecibelMaskingViewUnmask = 2,
-};
-
+enum SDKMaskAutomatic : NSInteger;
+enum SDKLogLevel : NSInteger;
 @class UIView;
 
 SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
@@ -1548,7 +1573,7 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 /// This method set masking for the current screen.
 /// \param mask Automatic configuration of component mask.
 ///
-- (void)setMaskingForCurrentScreenWithMask:(enum DecibelConfigurationMask)mask;
+- (void)setMaskingForCurrentScreenWithMask:(enum SDKMaskAutomatic)mask;
 /// This method sends any goal defined by the user.
 /// \param goal The name of the goal.
 ///
@@ -1568,17 +1593,17 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 ///
 - (void)sendWithGoal:(NSString * _Nonnull)goal;
 /// This method sends any dimension defined by the user.
-/// \param dimension The name of thedimension.
+/// \param dimension The name of the dimension.
 ///
 /// \param value The value specifies of the dimension.
 ///
 - (void)sendWithDimension:(NSString * _Nonnull)dimension withString:(NSString * _Nonnull)value;
-/// \param dimension The name of thedimension.
+/// \param dimension The name of the dimension.
 ///
 /// \param value The value specifies of the dimension.
 ///
 - (void)sendWithDimension:(NSString * _Nonnull)dimension withBool:(BOOL)value;
-/// \param dimension The name of thedimension.
+/// \param dimension The name of the dimension.
 ///
 /// \param value The value specifies of the dimension.
 ///
@@ -1590,7 +1615,7 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 /// Settings to mask all visual components that are selected throughout the application.
 /// \param configuration type of masking selected.
 ///
-- (void)setAutomaticMask:(enum DecibelConfigurationMask)configuration;
+- (void)setAutomaticMask:(enum SDKMaskAutomatic)configuration;
 /// Method to mask a CGRect.
 /// \param rect CGRect that you want to mask.
 ///
@@ -1606,7 +1631,7 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 /// Method set the log level.
 /// \param level DecibelLogLevelType that you want to set.
 ///
-- (void)setLogLevel:(enum DecibelLogLevelType)level;
+- (void)setLogLevel:(enum SDKLogLevel)level;
 /// Method to send the correct submission of the form.
 - (void)formSuccess;
 /// Method to submit an error in the form.
@@ -1615,17 +1640,16 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 /// \param selector The component that fails.
 ///
 - (void)formErrorWithError:(NSString * _Nonnull)error selector:(UIView * _Nullable)selector;
-/// Method to change the settings for sending the data.
-/// \param enabled parameter that enables or disables send data over mobile data.
-///
-- (void)useMobileData:(BOOL)enabled;
 @end
 
+@protocol SDKSettings;
 
 SWIFT_CLASS("_TtC11DecibelCore10DecibelSDK")
 @interface DecibelSDK : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) id <DecibelProtocol> _Nonnull shared;)
 + (id <DecibelProtocol> _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) id <SDKSettings> _Nonnull settings;)
++ (id <SDKSettings> _Nonnull)settings SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -1639,6 +1663,45 @@ typedef SWIFT_ENUM(NSInteger, DecibelUserConsent, open) {
 
 
 
+typedef SWIFT_ENUM(NSInteger, SDKLogLevel, open) {
+  SDKLogLevelNone = 0,
+  SDKLogLevelInfo = 1,
+};
+
+typedef SWIFT_ENUM(NSInteger, SDKMaskAutomatic, open) {
+  SDKMaskAutomaticLabels = 0,
+  SDKMaskAutomaticInputs = 1,
+  SDKMaskAutomaticImages = 2,
+  SDKMaskAutomaticWebViews = 3,
+  SDKMaskAutomaticAll = 4,
+  SDKMaskAutomaticNoMask = 5,
+};
+
+typedef SWIFT_ENUM(NSInteger, SDKMaskFidelity, open) {
+  SDKMaskFidelityHigh = 0,
+  SDKMaskFidelityLow = 1,
+};
+
+typedef SWIFT_ENUM(NSInteger, SDKMaskView, open) {
+  SDKMaskViewAutomatic = 0,
+  SDKMaskViewMask = 1,
+  SDKMaskViewUnmask = 2,
+};
+
+
+SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
+@protocol SDKSettings
+/// Property to change the settings for sending the data. With a true value, the data is sent both by
+/// Wi-Fi and mobile data.
+@property (nonatomic) BOOL mobileDataEnable;
+/// Define the masking behaviour with two possible values <code>.low</code>, <code>.high</code>.
+/// note:
+/// <code>.low</code> The video collects more frames, but in some cases the masking may not be perfect.
+/// note:
+/// <code>.high</code> The video quality may be bad in some cases, but the masking would be very reliable.
+@property (nonatomic) enum SDKMaskFidelity maskingFidelity;
+@end
+
 
 
 
@@ -1647,7 +1710,7 @@ typedef SWIFT_ENUM(NSInteger, DecibelUserConsent, open) {
 
 
 @interface UIView (SWIFT_EXTENSION(DecibelCore))
-@property (nonatomic) enum DecibelMaskingView diMasking;
+@property (nonatomic) enum SDKMaskView diMasking;
 @end
 
 

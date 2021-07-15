@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
-// swift-module-flags: -target i386-apple-ios10.3-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name DecibelCore
+// swift-module-flags: -target i386-apple-ios10.3-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -module-name DecibelCore
 import AVFoundation
 import CommonCrypto
 import CoreData
@@ -11,7 +11,8 @@ import OpenGLES
 import Swift
 import SystemConfiguration
 import UIKit
-@objc public enum DecibelMaskingView : Swift.Int {
+import WebKit
+@objc public enum SDKMaskView : Swift.Int {
   case automatic
   case mask
   case unmask
@@ -21,7 +22,7 @@ import UIKit
     get
   }
 }
-@objc public enum DecibelLogLevelType : Swift.Int {
+@objc public enum SDKLogLevel : Swift.Int {
   case none
   case info
   public typealias RawValue = Swift.Int
@@ -50,12 +51,21 @@ extension NSManagedObject {
   }
   public init?(rawValue: Swift.Int)
 }
+@objc public enum SDKMaskFidelity : Swift.Int {
+  case high
+  case low
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
 @objc public protocol DecibelProtocol : AnyObject {
   @objc var delegate: DecibelCore.DecibelDelegate? { get set }
   @objc func initialize(account: Swift.String, property: Swift.String)
   @objc func initialize(account: Swift.String, property: Swift.String, consents: [Swift.Int])
   @objc func set(screen: Swift.String)
-  @objc func setMaskingForCurrentScreen(mask: DecibelCore.DecibelConfigurationMask)
+  @objc func setMaskingForCurrentScreen(mask: DecibelCore.SDKMaskAutomatic)
   @objc func send(goal: Swift.String, with value: Swift.Float, currency: DecibelCore.DecibelCurrency)
   @objc func send(goal: Swift.String, with value: Swift.Float)
   @objc func send(goal: Swift.String)
@@ -63,17 +73,17 @@ extension NSManagedObject {
   @objc func send(dimension: Swift.String, withBool value: Swift.Bool)
   @objc func send(dimension: Swift.String, withNumber value: Swift.Double)
   @objc func enabledSessionReplay(_ enabled: Swift.Bool)
-  @objc func setAutomaticMask(_ configuration: DecibelCore.DecibelConfigurationMask)
+  @objc func setAutomaticMask(_ configuration: DecibelCore.SDKMaskAutomatic)
   @objc func mask(rect area: CoreGraphics.CGRect)
   @objc func setEnableConsents(_ consents: [Swift.Int])
   @objc func setDisableConsents(_ consents: [Swift.Int])
-  @objc func setLogLevel(_ level: DecibelCore.DecibelLogLevelType)
+  @objc func setLogLevel(_ level: DecibelCore.SDKLogLevel)
   @objc func formSuccess()
   @objc func formError(error: Swift.String, selector: UIKit.UIView?)
-  @objc func useMobileData(_ enabled: Swift.Bool)
 }
 @_inheritsConvenienceInitializers @objc public class DecibelSDK : ObjectiveC.NSObject {
   @objc public static let shared: DecibelCore.DecibelProtocol
+  @objc public static let settings: DecibelCore.SDKSettings
   @objc deinit
   @objc override dynamic public init()
 }
@@ -259,10 +269,11 @@ extension NSManagedObject {
     get
   }
 }
-@objc public enum DecibelConfigurationMask : Swift.Int {
+@objc public enum SDKMaskAutomatic : Swift.Int {
   case labels
   case inputs
   case images
+  case webViews
   case all
   case noMask
   public typealias RawValue = Swift.Int
@@ -272,23 +283,30 @@ extension NSManagedObject {
   }
 }
 extension UIView {
-  @objc dynamic public var diMasking: DecibelCore.DecibelMaskingView {
+  @objc dynamic public var diMasking: DecibelCore.SDKMaskView {
     @objc get
     @objc set
   }
 }
-extension DecibelCore.DecibelMaskingView : Swift.Equatable {}
-extension DecibelCore.DecibelMaskingView : Swift.Hashable {}
-extension DecibelCore.DecibelMaskingView : Swift.RawRepresentable {}
-extension DecibelCore.DecibelLogLevelType : Swift.Equatable {}
-extension DecibelCore.DecibelLogLevelType : Swift.Hashable {}
-extension DecibelCore.DecibelLogLevelType : Swift.RawRepresentable {}
+@objc public protocol SDKSettings : AnyObject {
+  @objc var mobileDataEnable: Swift.Bool { get set }
+  @objc var maskingFidelity: DecibelCore.SDKMaskFidelity { get set }
+}
+extension DecibelCore.SDKMaskView : Swift.Equatable {}
+extension DecibelCore.SDKMaskView : Swift.Hashable {}
+extension DecibelCore.SDKMaskView : Swift.RawRepresentable {}
+extension DecibelCore.SDKLogLevel : Swift.Equatable {}
+extension DecibelCore.SDKLogLevel : Swift.Hashable {}
+extension DecibelCore.SDKLogLevel : Swift.RawRepresentable {}
 extension DecibelCore.DecibelUserConsent : Swift.Equatable {}
 extension DecibelCore.DecibelUserConsent : Swift.Hashable {}
 extension DecibelCore.DecibelUserConsent : Swift.RawRepresentable {}
+extension DecibelCore.SDKMaskFidelity : Swift.Equatable {}
+extension DecibelCore.SDKMaskFidelity : Swift.Hashable {}
+extension DecibelCore.SDKMaskFidelity : Swift.RawRepresentable {}
 extension DecibelCore.DecibelCurrency : Swift.Equatable {}
 extension DecibelCore.DecibelCurrency : Swift.Hashable {}
 extension DecibelCore.DecibelCurrency : Swift.RawRepresentable {}
-extension DecibelCore.DecibelConfigurationMask : Swift.Equatable {}
-extension DecibelCore.DecibelConfigurationMask : Swift.Hashable {}
-extension DecibelCore.DecibelConfigurationMask : Swift.RawRepresentable {}
+extension DecibelCore.SDKMaskAutomatic : Swift.Equatable {}
+extension DecibelCore.SDKMaskAutomatic : Swift.Hashable {}
+extension DecibelCore.SDKMaskAutomatic : Swift.RawRepresentable {}
