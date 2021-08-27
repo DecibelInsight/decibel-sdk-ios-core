@@ -44,6 +44,7 @@ extension NSManagedObject {
   case all
   case recordingAndTracking
   case tracking
+  case form
   case none
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
@@ -274,6 +275,8 @@ extension NSManagedObject {
   case inputs
   case images
   case webViews
+  case forms
+  case formsContainer
   case all
   case noMask
   public typealias RawValue = Swift.Int
@@ -284,6 +287,10 @@ extension NSManagedObject {
 }
 extension UIView {
   @objc dynamic public var diMasking: DecibelCore.SDKMaskView {
+    @objc get
+    @objc set
+  }
+  @objc dynamic public var diFormTrack: Swift.Bool {
     @objc get
     @objc set
   }

@@ -509,7 +509,8 @@ typedef SWIFT_ENUM(NSInteger, DecibelUserConsent, open) {
   DecibelUserConsentAll = 0,
   DecibelUserConsentRecordingAndTracking = 1,
   DecibelUserConsentTracking = 2,
-  DecibelUserConsentNone = 3,
+  DecibelUserConsentForm = 3,
+  DecibelUserConsentNone = 4,
 };
 
 
@@ -525,8 +526,10 @@ typedef SWIFT_ENUM(NSInteger, SDKMaskAutomatic, open) {
   SDKMaskAutomaticInputs = 1,
   SDKMaskAutomaticImages = 2,
   SDKMaskAutomaticWebViews = 3,
-  SDKMaskAutomaticAll = 4,
-  SDKMaskAutomaticNoMask = 5,
+  SDKMaskAutomaticForms = 4,
+  SDKMaskAutomaticFormsContainer = 5,
+  SDKMaskAutomaticAll = 6,
+  SDKMaskAutomaticNoMask = 7,
 };
 
 typedef SWIFT_ENUM(NSInteger, SDKMaskFidelity, open) {
@@ -561,8 +564,10 @@ SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 
 
 
+
 @interface UIView (SWIFT_EXTENSION(DecibelCore))
 @property (nonatomic) enum SDKMaskView diMasking;
+@property (nonatomic) BOOL diFormTrack;
 @end
 
 
@@ -1083,7 +1088,8 @@ typedef SWIFT_ENUM(NSInteger, DecibelUserConsent, open) {
   DecibelUserConsentAll = 0,
   DecibelUserConsentRecordingAndTracking = 1,
   DecibelUserConsentTracking = 2,
-  DecibelUserConsentNone = 3,
+  DecibelUserConsentForm = 3,
+  DecibelUserConsentNone = 4,
 };
 
 
@@ -1099,8 +1105,10 @@ typedef SWIFT_ENUM(NSInteger, SDKMaskAutomatic, open) {
   SDKMaskAutomaticInputs = 1,
   SDKMaskAutomaticImages = 2,
   SDKMaskAutomaticWebViews = 3,
-  SDKMaskAutomaticAll = 4,
-  SDKMaskAutomaticNoMask = 5,
+  SDKMaskAutomaticForms = 4,
+  SDKMaskAutomaticFormsContainer = 5,
+  SDKMaskAutomaticAll = 6,
+  SDKMaskAutomaticNoMask = 7,
 };
 
 typedef SWIFT_ENUM(NSInteger, SDKMaskFidelity, open) {
@@ -1135,8 +1143,10 @@ SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 
 
 
+
 @interface UIView (SWIFT_EXTENSION(DecibelCore))
 @property (nonatomic) enum SDKMaskView diMasking;
+@property (nonatomic) BOOL diFormTrack;
 @end
 
 
@@ -1657,7 +1667,8 @@ typedef SWIFT_ENUM(NSInteger, DecibelUserConsent, open) {
   DecibelUserConsentAll = 0,
   DecibelUserConsentRecordingAndTracking = 1,
   DecibelUserConsentTracking = 2,
-  DecibelUserConsentNone = 3,
+  DecibelUserConsentForm = 3,
+  DecibelUserConsentNone = 4,
 };
 
 
@@ -1673,8 +1684,10 @@ typedef SWIFT_ENUM(NSInteger, SDKMaskAutomatic, open) {
   SDKMaskAutomaticInputs = 1,
   SDKMaskAutomaticImages = 2,
   SDKMaskAutomaticWebViews = 3,
-  SDKMaskAutomaticAll = 4,
-  SDKMaskAutomaticNoMask = 5,
+  SDKMaskAutomaticForms = 4,
+  SDKMaskAutomaticFormsContainer = 5,
+  SDKMaskAutomaticAll = 6,
+  SDKMaskAutomaticNoMask = 7,
 };
 
 typedef SWIFT_ENUM(NSInteger, SDKMaskFidelity, open) {
@@ -1709,8 +1722,10 @@ SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 
 
 
+
 @interface UIView (SWIFT_EXTENSION(DecibelCore))
 @property (nonatomic) enum SDKMaskView diMasking;
+@property (nonatomic) BOOL diFormTrack;
 @end
 
 
