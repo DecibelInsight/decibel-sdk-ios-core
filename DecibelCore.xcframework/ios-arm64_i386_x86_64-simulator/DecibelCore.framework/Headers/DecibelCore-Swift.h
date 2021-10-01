@@ -543,6 +543,11 @@ typedef SWIFT_ENUM(NSInteger, SDKMaskView, open) {
   SDKMaskViewUnmask = 2,
 };
 
+typedef SWIFT_ENUM(NSInteger, SDKRecordingMode, open) {
+  SDKRecordingModeDefineScreensToRecord = 0,
+  SDKRecordingModeDefineScreensToStopRecord = 1,
+};
+
 
 SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 @protocol SDKSettings
@@ -555,6 +560,14 @@ SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 /// note:
 /// <code>.high</code> The video quality may be bad in some cases, but the masking would be very reliable.
 @property (nonatomic) enum SDKMaskFidelity maskingFidelity;
+/// Defines the behaviour of video recording. There are 2 modes:
+/// note:
+/// <code>.defineScreensToRecord</code> This mode will not record any screen by default.
+/// To record a specific screen, it must be defined within the screen that you want to record.
+/// note:
+/// <code>.defineScreensToStopRecord</code> This mode records all screens by default. If it is required not to record a specific screen, it must be specified on the screen.
+/// This mode is enabled by default.
+@property (nonatomic) enum SDKRecordingMode recordingMode;
 @end
 
 
@@ -568,7 +581,11 @@ SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 @interface UIView (SWIFT_EXTENSION(DecibelCore))
 @property (nonatomic) enum SDKMaskView diMasking;
 @property (nonatomic) BOOL diFormTrack;
+@property (nonatomic) BOOL diAddScreenForRecordingMode;
 @end
+
+
+
 
 
 
@@ -1122,6 +1139,11 @@ typedef SWIFT_ENUM(NSInteger, SDKMaskView, open) {
   SDKMaskViewUnmask = 2,
 };
 
+typedef SWIFT_ENUM(NSInteger, SDKRecordingMode, open) {
+  SDKRecordingModeDefineScreensToRecord = 0,
+  SDKRecordingModeDefineScreensToStopRecord = 1,
+};
+
 
 SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 @protocol SDKSettings
@@ -1134,6 +1156,14 @@ SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 /// note:
 /// <code>.high</code> The video quality may be bad in some cases, but the masking would be very reliable.
 @property (nonatomic) enum SDKMaskFidelity maskingFidelity;
+/// Defines the behaviour of video recording. There are 2 modes:
+/// note:
+/// <code>.defineScreensToRecord</code> This mode will not record any screen by default.
+/// To record a specific screen, it must be defined within the screen that you want to record.
+/// note:
+/// <code>.defineScreensToStopRecord</code> This mode records all screens by default. If it is required not to record a specific screen, it must be specified on the screen.
+/// This mode is enabled by default.
+@property (nonatomic) enum SDKRecordingMode recordingMode;
 @end
 
 
@@ -1147,7 +1177,11 @@ SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 @interface UIView (SWIFT_EXTENSION(DecibelCore))
 @property (nonatomic) enum SDKMaskView diMasking;
 @property (nonatomic) BOOL diFormTrack;
+@property (nonatomic) BOOL diAddScreenForRecordingMode;
 @end
+
+
+
 
 
 
@@ -1701,6 +1735,11 @@ typedef SWIFT_ENUM(NSInteger, SDKMaskView, open) {
   SDKMaskViewUnmask = 2,
 };
 
+typedef SWIFT_ENUM(NSInteger, SDKRecordingMode, open) {
+  SDKRecordingModeDefineScreensToRecord = 0,
+  SDKRecordingModeDefineScreensToStopRecord = 1,
+};
+
 
 SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 @protocol SDKSettings
@@ -1713,6 +1752,14 @@ SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 /// note:
 /// <code>.high</code> The video quality may be bad in some cases, but the masking would be very reliable.
 @property (nonatomic) enum SDKMaskFidelity maskingFidelity;
+/// Defines the behaviour of video recording. There are 2 modes:
+/// note:
+/// <code>.defineScreensToRecord</code> This mode will not record any screen by default.
+/// To record a specific screen, it must be defined within the screen that you want to record.
+/// note:
+/// <code>.defineScreensToStopRecord</code> This mode records all screens by default. If it is required not to record a specific screen, it must be specified on the screen.
+/// This mode is enabled by default.
+@property (nonatomic) enum SDKRecordingMode recordingMode;
 @end
 
 
@@ -1726,7 +1773,11 @@ SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 @interface UIView (SWIFT_EXTENSION(DecibelCore))
 @property (nonatomic) enum SDKMaskView diMasking;
 @property (nonatomic) BOOL diFormTrack;
+@property (nonatomic) BOOL diAddScreenForRecordingMode;
 @end
+
+
+
 
 
 

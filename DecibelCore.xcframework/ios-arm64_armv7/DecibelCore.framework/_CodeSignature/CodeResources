@@ -26,7 +26,7 @@
 		</data>
 		<key>Headers/DecibelCore-Swift.h</key>
 		<data>
-		wghzlUQ2+fzL7rb4U+ySbQIOwQY=
+		Yv1pLOp7bfU/gFnJT4vOaWIZnzs=
 		</data>
 		<key>Headers/DecibelSDK.h</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		HQd1BTcoq7DJtGqT/dVKTeqn73Y=
+		fBAYlTKX35DrMxVT/fGIgr5EAzI=
 		</data>
 		<key>Migration1to2.cdm</key>
 		<data>
@@ -46,63 +46,63 @@
 		</data>
 		<key>Modules/DecibelCore.swiftmodule/arm.swiftdoc</key>
 		<data>
-		04HRjIoykLdiAT4aILbyXJGwZFM=
+		qaSoq5Jd2q8p93M6kljjIM2Crq0=
 		</data>
 		<key>Modules/DecibelCore.swiftmodule/arm.swiftinterface</key>
 		<data>
-		95IjT5odqSLMlbC6JI3JVd1uGV0=
+		Jz1ih5Y/dCgJf7tKgt5czebDpYM=
 		</data>
 		<key>Modules/DecibelCore.swiftmodule/arm.swiftmodule</key>
 		<data>
-		wP4yTUgJYaMS0u6zSvago5uFBqE=
+		ov193H0YtX0jjVHyqdH2Y1YxzuA=
 		</data>
 		<key>Modules/DecibelCore.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		TsAmpNWa9dDlqI9L/W1qrUBBaUs=
+		h0jAYIXTvZ3yjHwTIiBX8k8uzDE=
 		</data>
 		<key>Modules/DecibelCore.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		ZW8wEAxaNOTZLb1ACTeXmJ2V8Yo=
+		vfdgJcckI2fkgfzSMzTUhFUsHFM=
 		</data>
 		<key>Modules/DecibelCore.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		4V3kuqlTNw5aw3CXkBHYpy5AYSY=
+		YBxspzAe1X8UYEwCYVww74vlqQE=
 		</data>
 		<key>Modules/DecibelCore.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		TsAmpNWa9dDlqI9L/W1qrUBBaUs=
+		h0jAYIXTvZ3yjHwTIiBX8k8uzDE=
 		</data>
 		<key>Modules/DecibelCore.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		ZW8wEAxaNOTZLb1ACTeXmJ2V8Yo=
+		vfdgJcckI2fkgfzSMzTUhFUsHFM=
 		</data>
 		<key>Modules/DecibelCore.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		4V3kuqlTNw5aw3CXkBHYpy5AYSY=
+		YBxspzAe1X8UYEwCYVww74vlqQE=
 		</data>
 		<key>Modules/DecibelCore.swiftmodule/armv7-apple-ios.swiftdoc</key>
 		<data>
-		04HRjIoykLdiAT4aILbyXJGwZFM=
+		qaSoq5Jd2q8p93M6kljjIM2Crq0=
 		</data>
 		<key>Modules/DecibelCore.swiftmodule/armv7-apple-ios.swiftinterface</key>
 		<data>
-		95IjT5odqSLMlbC6JI3JVd1uGV0=
+		Jz1ih5Y/dCgJf7tKgt5czebDpYM=
 		</data>
 		<key>Modules/DecibelCore.swiftmodule/armv7-apple-ios.swiftmodule</key>
 		<data>
-		wP4yTUgJYaMS0u6zSvago5uFBqE=
+		ov193H0YtX0jjVHyqdH2Y1YxzuA=
 		</data>
 		<key>Modules/DecibelCore.swiftmodule/armv7.swiftdoc</key>
 		<data>
-		04HRjIoykLdiAT4aILbyXJGwZFM=
+		qaSoq5Jd2q8p93M6kljjIM2Crq0=
 		</data>
 		<key>Modules/DecibelCore.swiftmodule/armv7.swiftinterface</key>
 		<data>
-		95IjT5odqSLMlbC6JI3JVd1uGV0=
+		Jz1ih5Y/dCgJf7tKgt5czebDpYM=
 		</data>
 		<key>Modules/DecibelCore.swiftmodule/armv7.swiftmodule</key>
 		<data>
-		wP4yTUgJYaMS0u6zSvago5uFBqE=
+		ov193H0YtX0jjVHyqdH2Y1YxzuA=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -170,11 +170,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wghzlUQ2+fzL7rb4U+ySbQIOwQY=
+			Yv1pLOp7bfU/gFnJT4vOaWIZnzs=
 			</data>
 			<key>hash2</key>
 			<data>
-			lqVByBmF4YwBKLniv67DBFgiwJRcEQ7CFiADF4BnEbI=
+			jBHSTCdcwNumQa9tAFKzbsRX379yYDhXVcLKSDZxtek=
 			</data>
 		</dict>
 		<key>Headers/DecibelSDK.h</key>
@@ -214,165 +214,165 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			04HRjIoykLdiAT4aILbyXJGwZFM=
+			qaSoq5Jd2q8p93M6kljjIM2Crq0=
 			</data>
 			<key>hash2</key>
 			<data>
-			VHwRewePVXbAskM/CzVHYGgomMLKmyxyMM8o5zZ+SsM=
+			tb7aQ5Hoxx9VyT8Mp1JnGDw+CXKM9ivHFQRHfv9Bzk4=
 			</data>
 		</dict>
 		<key>Modules/DecibelCore.swiftmodule/arm.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			95IjT5odqSLMlbC6JI3JVd1uGV0=
+			Jz1ih5Y/dCgJf7tKgt5czebDpYM=
 			</data>
 			<key>hash2</key>
 			<data>
-			IuR+8pwqlzTJAOIVlnxBKLf8msB+QtYx8rPWSFBMPQ4=
+			PRqVu6DJbQxn8oJ/Vi0EEBRV/LAnSZ+b1MMJWelA8Bk=
 			</data>
 		</dict>
 		<key>Modules/DecibelCore.swiftmodule/arm.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			wP4yTUgJYaMS0u6zSvago5uFBqE=
+			ov193H0YtX0jjVHyqdH2Y1YxzuA=
 			</data>
 			<key>hash2</key>
 			<data>
-			d044wIbO/+BbcrCYVMY7SMRvfu0SQ/f55MKhdOmjFP4=
+			4ywBGaeAVsCxpovXW8+cFVQeicZa8ATlGCxr1E5fQGw=
 			</data>
 		</dict>
 		<key>Modules/DecibelCore.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			TsAmpNWa9dDlqI9L/W1qrUBBaUs=
+			h0jAYIXTvZ3yjHwTIiBX8k8uzDE=
 			</data>
 			<key>hash2</key>
 			<data>
-			pfM5JPMlRkC4rEU/ULOSLVmbyTYe6yzAnwJvQwIZDvM=
+			Sh3s32sXoJbesl2ByKpEKrXB6ciorvfafk2O/S17/Ec=
 			</data>
 		</dict>
 		<key>Modules/DecibelCore.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ZW8wEAxaNOTZLb1ACTeXmJ2V8Yo=
+			vfdgJcckI2fkgfzSMzTUhFUsHFM=
 			</data>
 			<key>hash2</key>
 			<data>
-			OKmgh/MiCQpu0i6h3WsFizfqjzzDACM1NwVYRxgTW0Y=
+			ZRJJKA1OqeihpST9Xct9KmFYGtAueamXa1g/K6IKu34=
 			</data>
 		</dict>
 		<key>Modules/DecibelCore.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			4V3kuqlTNw5aw3CXkBHYpy5AYSY=
+			YBxspzAe1X8UYEwCYVww74vlqQE=
 			</data>
 			<key>hash2</key>
 			<data>
-			p+SGYimTHLUMhiL5tVaFEDOpFSWF3Y47c+OU1XF/cfU=
+			f38uHtabvVRP1GDqr3/IrMyRvTor/+tppYWxY/dqzxQ=
 			</data>
 		</dict>
 		<key>Modules/DecibelCore.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			TsAmpNWa9dDlqI9L/W1qrUBBaUs=
+			h0jAYIXTvZ3yjHwTIiBX8k8uzDE=
 			</data>
 			<key>hash2</key>
 			<data>
-			pfM5JPMlRkC4rEU/ULOSLVmbyTYe6yzAnwJvQwIZDvM=
+			Sh3s32sXoJbesl2ByKpEKrXB6ciorvfafk2O/S17/Ec=
 			</data>
 		</dict>
 		<key>Modules/DecibelCore.swiftmodule/arm64.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ZW8wEAxaNOTZLb1ACTeXmJ2V8Yo=
+			vfdgJcckI2fkgfzSMzTUhFUsHFM=
 			</data>
 			<key>hash2</key>
 			<data>
-			OKmgh/MiCQpu0i6h3WsFizfqjzzDACM1NwVYRxgTW0Y=
+			ZRJJKA1OqeihpST9Xct9KmFYGtAueamXa1g/K6IKu34=
 			</data>
 		</dict>
 		<key>Modules/DecibelCore.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			4V3kuqlTNw5aw3CXkBHYpy5AYSY=
+			YBxspzAe1X8UYEwCYVww74vlqQE=
 			</data>
 			<key>hash2</key>
 			<data>
-			p+SGYimTHLUMhiL5tVaFEDOpFSWF3Y47c+OU1XF/cfU=
+			f38uHtabvVRP1GDqr3/IrMyRvTor/+tppYWxY/dqzxQ=
 			</data>
 		</dict>
 		<key>Modules/DecibelCore.swiftmodule/armv7-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			04HRjIoykLdiAT4aILbyXJGwZFM=
+			qaSoq5Jd2q8p93M6kljjIM2Crq0=
 			</data>
 			<key>hash2</key>
 			<data>
-			VHwRewePVXbAskM/CzVHYGgomMLKmyxyMM8o5zZ+SsM=
+			tb7aQ5Hoxx9VyT8Mp1JnGDw+CXKM9ivHFQRHfv9Bzk4=
 			</data>
 		</dict>
 		<key>Modules/DecibelCore.swiftmodule/armv7-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			95IjT5odqSLMlbC6JI3JVd1uGV0=
+			Jz1ih5Y/dCgJf7tKgt5czebDpYM=
 			</data>
 			<key>hash2</key>
 			<data>
-			IuR+8pwqlzTJAOIVlnxBKLf8msB+QtYx8rPWSFBMPQ4=
+			PRqVu6DJbQxn8oJ/Vi0EEBRV/LAnSZ+b1MMJWelA8Bk=
 			</data>
 		</dict>
 		<key>Modules/DecibelCore.swiftmodule/armv7-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			wP4yTUgJYaMS0u6zSvago5uFBqE=
+			ov193H0YtX0jjVHyqdH2Y1YxzuA=
 			</data>
 			<key>hash2</key>
 			<data>
-			d044wIbO/+BbcrCYVMY7SMRvfu0SQ/f55MKhdOmjFP4=
+			4ywBGaeAVsCxpovXW8+cFVQeicZa8ATlGCxr1E5fQGw=
 			</data>
 		</dict>
 		<key>Modules/DecibelCore.swiftmodule/armv7.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			04HRjIoykLdiAT4aILbyXJGwZFM=
+			qaSoq5Jd2q8p93M6kljjIM2Crq0=
 			</data>
 			<key>hash2</key>
 			<data>
-			VHwRewePVXbAskM/CzVHYGgomMLKmyxyMM8o5zZ+SsM=
+			tb7aQ5Hoxx9VyT8Mp1JnGDw+CXKM9ivHFQRHfv9Bzk4=
 			</data>
 		</dict>
 		<key>Modules/DecibelCore.swiftmodule/armv7.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			95IjT5odqSLMlbC6JI3JVd1uGV0=
+			Jz1ih5Y/dCgJf7tKgt5czebDpYM=
 			</data>
 			<key>hash2</key>
 			<data>
-			IuR+8pwqlzTJAOIVlnxBKLf8msB+QtYx8rPWSFBMPQ4=
+			PRqVu6DJbQxn8oJ/Vi0EEBRV/LAnSZ+b1MMJWelA8Bk=
 			</data>
 		</dict>
 		<key>Modules/DecibelCore.swiftmodule/armv7.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			wP4yTUgJYaMS0u6zSvago5uFBqE=
+			ov193H0YtX0jjVHyqdH2Y1YxzuA=
 			</data>
 			<key>hash2</key>
 			<data>
-			d044wIbO/+BbcrCYVMY7SMRvfu0SQ/f55MKhdOmjFP4=
+			4ywBGaeAVsCxpovXW8+cFVQeicZa8ATlGCxr1E5fQGw=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

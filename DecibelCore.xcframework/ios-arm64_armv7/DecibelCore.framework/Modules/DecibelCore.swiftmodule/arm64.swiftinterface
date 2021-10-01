@@ -22,6 +22,15 @@ import WebKit
     get
   }
 }
+@objc public enum SDKRecordingMode : Swift.Int {
+  case defineScreensToRecord
+  case defineScreensToStopRecord
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
 @objc public enum SDKLogLevel : Swift.Int {
   case none
   case info
@@ -294,14 +303,22 @@ extension UIView {
     @objc get
     @objc set
   }
+  @objc dynamic public var diAddScreenForRecordingMode: Swift.Bool {
+    @objc get
+    @objc set
+  }
 }
 @objc public protocol SDKSettings : AnyObject {
   @objc var mobileDataEnable: Swift.Bool { get set }
   @objc var maskingFidelity: DecibelCore.SDKMaskFidelity { get set }
+  @objc var recordingMode: DecibelCore.SDKRecordingMode { get set }
 }
 extension DecibelCore.SDKMaskView : Swift.Equatable {}
 extension DecibelCore.SDKMaskView : Swift.Hashable {}
 extension DecibelCore.SDKMaskView : Swift.RawRepresentable {}
+extension DecibelCore.SDKRecordingMode : Swift.Equatable {}
+extension DecibelCore.SDKRecordingMode : Swift.Hashable {}
+extension DecibelCore.SDKRecordingMode : Swift.RawRepresentable {}
 extension DecibelCore.SDKLogLevel : Swift.Equatable {}
 extension DecibelCore.SDKLogLevel : Swift.Hashable {}
 extension DecibelCore.SDKLogLevel : Swift.RawRepresentable {}
