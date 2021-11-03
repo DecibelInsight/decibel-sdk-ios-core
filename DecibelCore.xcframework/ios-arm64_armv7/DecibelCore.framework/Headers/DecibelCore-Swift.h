@@ -211,6 +211,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
+/// Enum for all possible currencies.
 typedef SWIFT_ENUM(NSInteger, DecibelCurrency, open) {
   DecibelCurrencyAED = 0,
   DecibelCurrencyAFN = 1,
@@ -390,11 +391,17 @@ typedef SWIFT_ENUM(NSInteger, DecibelCurrency, open) {
 };
 
 
+/// To obtain the link to the user session you have to use the DecibelSDK delegate method in the
+/// didFinishLaunchingWithOptions method of your application class.
 SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelDelegate_")
 @protocol DecibelDelegate
+/// This method is called when a new session id is generated.
+/// \param sessionUrl contains the URL to access the session replay in the Decibel portal
+///
 - (void)getSessionURL:(NSString * _Nonnull)sessionUrl;
 @end
 
+enum SDKSessionReplayType : NSInteger;
 enum SDKMaskAutomatic : NSInteger;
 enum SDKLogLevel : NSInteger;
 @class UIView;
@@ -415,13 +422,20 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 ///
 /// \param property Account property.
 ///
-/// \param consents Consent with which you want the app to start. If you pass .all all consents will be enabled by default, if you pass .none all consents will be disabled.
+/// \param consents Consent with which you want the app to start. If you pass .all all consents will be enabled by default,
+/// if you pass .none all consents will be disabled.
 ///
 - (void)initializeWithAccount:(NSString * _Nonnull)account property:(NSString * _Nonnull)property consents:(NSArray<NSNumber *> * _Nonnull)consents;
 /// This method set the screen for a new recorder cycle.
 /// \param screen The name of screen.
 ///
 - (void)setWithScreen:(NSString * _Nonnull)screen;
+/// This method set the screen for a new recorder cycle.
+/// \param screen The name of screen.
+///
+/// \param sessionReplayType The type of video recording to session replay.
+///
+- (void)setWithScreen:(NSString * _Nonnull)screen sessionReplayType:(enum SDKSessionReplayType)sessionReplayType;
 /// This method set masking for the current screen.
 /// \param mask Automatic configuration of component mask.
 ///
@@ -473,11 +487,11 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 ///
 - (void)maskWithRect:(CGRect)area;
 /// Method to enable consents.
-/// \param consents DecibelCustomerConsentTypes that you want to enable.
+/// \param consents DecibelUserConsent that you want to enable.
 ///
 - (void)setEnableConsents:(NSArray<NSNumber *> * _Nonnull)consents;
 /// Method to disable consents.
-/// \param consents DecibelCustomerConsentTypes that you want to disable.
+/// \param consents DecibelUserConsent that you want to disable.
 ///
 - (void)setDisableConsents:(NSArray<NSNumber *> * _Nonnull)consents;
 /// Method set the log level.
@@ -505,6 +519,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) id <SDKSetti
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+/// Enum for enabling or disable consents.
 typedef SWIFT_ENUM(NSInteger, DecibelUserConsent, open) {
   DecibelUserConsentAll = 0,
   DecibelUserConsentRecordingAndTracking = 1,
@@ -516,36 +531,121 @@ typedef SWIFT_ENUM(NSInteger, DecibelUserConsent, open) {
 
 
 
+/// Enum for the SDK logs.
 typedef SWIFT_ENUM(NSInteger, SDKLogLevel, open) {
   SDKLogLevelNone = 0,
   SDKLogLevelInfo = 1,
 };
 
+/// Enum for automatic masking components.
+/// <ul>
+///   <li>
+///     <code>.labels</code>: all UILabel fields are masked.
+///   </li>
+///   <li>
+///     <code>.inputs</code>: all UITextField and UITextView fields are masked.
+///   </li>
+///   <li>
+///     <code>.images</code>: all UIImageView will be masked.
+///   </li>
+///   <li>
+///     <code>.webViews</code>: all WKWebView are masked whole view. (no elements inside it).
+///   </li>
+///   <li>
+///     <code>.forms</code>: the view containing the form components must be set to true the
+///     diFormTrack property and these components will be masked automatically.
+///   </li>
+///   <li>
+///     <code>.all</code>: all case masks the rest of the cases (.labels, .inputs and .images).
+///   </li>
+///   <li>
+///     <code>.noMask</code>: no masking anything..
+///   </li>
+/// </ul>
 typedef SWIFT_ENUM(NSInteger, SDKMaskAutomatic, open) {
   SDKMaskAutomaticLabels = 0,
   SDKMaskAutomaticInputs = 1,
   SDKMaskAutomaticImages = 2,
   SDKMaskAutomaticWebViews = 3,
   SDKMaskAutomaticForms = 4,
-  SDKMaskAutomaticFormsContainer = 5,
-  SDKMaskAutomaticAll = 6,
-  SDKMaskAutomaticNoMask = 7,
+  SDKMaskAutomaticAll = 5,
+  SDKMaskAutomaticNoMask = 6,
 };
 
-typedef SWIFT_ENUM(NSInteger, SDKMaskFidelity, open) {
-  SDKMaskFidelityHigh = 0,
-  SDKMaskFidelityLow = 1,
-};
-
+/// Enum for masking or unmasking UIView components. By default is set <code>.automatic</code>.
+/// <ul>
+///   <li>
+///     <code>automatic</code>: mask or unmask depending of automatic masking.
+///   </li>
+///   <li>
+///     <code>mask</code>: mask the <code>UIView</code> that would be not masked automatic.
+///   </li>
+///   <li>
+///     <code>unmask</code>: unmask the <code>UIView</code> that would be masked automatic.
+///   </li>
+/// </ul>
 typedef SWIFT_ENUM(NSInteger, SDKMaskView, open) {
   SDKMaskViewAutomatic = 0,
   SDKMaskViewMask = 1,
   SDKMaskViewUnmask = 2,
 };
 
+/// Defines the behaviour of choosing screens to record or choosing which will not be recorded.
+/// <ul>
+///   <li>
+///     <code>.defineScreensToRecord</code>: this mode will not record any screen by default.
+///     To record a specific screen, it must be defined within the screen that you want to record.
+///   </li>
+///   <li>
+///     <code>.defineScreensToStopRecord</code>: this mode records all screens by default. If it is required not to record a specific screen,
+///     it must be specified on the screen.
+///   </li>
+/// </ul>
 typedef SWIFT_ENUM(NSInteger, SDKRecordingMode, open) {
   SDKRecordingModeDefineScreensToRecord = 0,
   SDKRecordingModeDefineScreensToStopRecord = 1,
+};
+
+/// Defines the behaviour of video recording. There are three modes.
+/// <ul>
+///   <li>
+///     <code>record</code>:  with this option in the main view on a view controller the screen will not be recorded. It is only necessary when
+///     the recordingMode is .defineScreensToStopRecord.
+///   </li>
+///   <li>
+///     <code>noRecord</code>:  with this option in the main view on a view controller the screen will be recorded. It is only necessary when
+///     the recordingMode is .defineScreensToRecord.
+///   </li>
+///   <li>
+///     <code>undefined</code>: this is the default option. This screen will be recorded depending on the value of recordingMode. In the
+///     case of .defineScreensToRecord the screen will not be recorded and with the case of .defineScreensToStopRecord the screen will be recorded.
+///   </li>
+/// </ul>
+typedef SWIFT_ENUM(NSInteger, SDKRecordingScreen, open) {
+  SDKRecordingScreenRecord = 0,
+  SDKRecordingScreenNoRecord = 1,
+  SDKRecordingScreenUndefined = 2,
+};
+
+/// Defines the type of session replay that we want to see from the user. There are three modes:
+/// <ul>
+///   <li>
+///     <code>.hiFi</code>: for this case it will be a replay session with great definition. All components will be recorded.
+///     It is not recommended to use this method in the case of masking some components.
+///   </li>
+///   <li>
+///     <code>.loFi</code>: this mode will record the screen in low fidelity. Not all components will be recorded as shown on the
+///     screen but it can be used to give us an idea of what the screen looks like. This mode is recommended for screens that have some masking.
+///   </li>
+///   <li>
+///     <code>.automatic</code>: in this case the type is selected automatically, being High fidelity in all the screens that do not contain
+///     masks and Low fidelity in those that contain some component to mask.
+///   </li>
+/// </ul>
+typedef SWIFT_ENUM(NSInteger, SDKSessionReplayType, open) {
+  SDKSessionReplayTypeHiFi = 0,
+  SDKSessionReplayTypeLoFi = 1,
+  SDKSessionReplayTypeAutomatic = 2,
 };
 
 
@@ -554,21 +654,42 @@ SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 /// Property to change the settings for sending the data. With a true value, the data is sent both by
 /// Wi-Fi and mobile data.
 @property (nonatomic) BOOL mobileDataEnable;
-/// Define the masking behaviour with two possible values <code>.low</code>, <code>.high</code>.
+/// Defines the behaviour of video recording. There are two modes.
 /// note:
-/// <code>.low</code> The video collects more frames, but in some cases the masking may not be perfect.
-/// note:
-/// <code>.high</code> The video quality may be bad in some cases, but the masking would be very reliable.
-@property (nonatomic) enum SDKMaskFidelity maskingFidelity;
-/// Defines the behaviour of video recording. There are 2 modes:
-/// note:
-/// <code>.defineScreensToRecord</code> This mode will not record any screen by default.
-/// To record a specific screen, it must be defined within the screen that you want to record.
-/// note:
-/// <code>.defineScreensToStopRecord</code> This mode records all screens by default. If it is required not to record a specific screen, it must be specified on the screen.
-/// This mode is enabled by default.
+/// <code>.defineScreensToStopRecord</code>: This mode records all screens by default. If it is required not to
+/// record a specific screen, it must be specified on the screen. This mode is enabled by default.
+/// <ul>
+///   <li>
+///     <code>.defineScreensToRecord</code>: This mode will not record any screen by default.
+///     To record a specific screen, it must be defined within the screen that you want to record.
+///   </li>
+/// </ul>
 @property (nonatomic) enum SDKRecordingMode recordingMode;
+/// Defines the type of session replay that we want to see from the user. There are four modes:
+/// <ul>
+///   <li>
+///     <code>.hiFi</code>: For this case it will be a replay session with great definition.
+///     All components will be recorded. It is not recommended to use this method in the case of masking some components.
+///   </li>
+///   <li>
+///     <code>.loFi</code>: This mode will record the screen in low fidelity. Not all components will be recorded as shown
+///     on the screen but it can be used to give us an idea of what the screen looks like.
+///     This mode is recommended for screens that have some masking.
+///   </li>
+///   <li>
+///     <code>.automatic</code>: In this case the type is selected automatically, being High fidelity in all the screens that do not
+///     contain masks and Low fidelity in those that contain some component to mask.
+///   </li>
+/// </ul>
+@property (nonatomic) enum SDKSessionReplayType sessionReplayType;
 @end
+
+
+
+
+
+
+
 
 
 
@@ -581,8 +702,10 @@ SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 @interface UIView (SWIFT_EXTENSION(DecibelCore))
 @property (nonatomic) enum SDKMaskView diMasking;
 @property (nonatomic) BOOL diFormTrack;
-@property (nonatomic) BOOL diAddScreenForRecordingMode;
+@property (nonatomic) enum SDKRecordingScreen diAddScreenForRecording;
+@property (nonatomic) enum SDKSessionReplayType diSessionReplayType;
 @end
+
 
 
 
@@ -807,6 +930,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
+/// Enum for all possible currencies.
 typedef SWIFT_ENUM(NSInteger, DecibelCurrency, open) {
   DecibelCurrencyAED = 0,
   DecibelCurrencyAFN = 1,
@@ -986,11 +1110,17 @@ typedef SWIFT_ENUM(NSInteger, DecibelCurrency, open) {
 };
 
 
+/// To obtain the link to the user session you have to use the DecibelSDK delegate method in the
+/// didFinishLaunchingWithOptions method of your application class.
 SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelDelegate_")
 @protocol DecibelDelegate
+/// This method is called when a new session id is generated.
+/// \param sessionUrl contains the URL to access the session replay in the Decibel portal
+///
 - (void)getSessionURL:(NSString * _Nonnull)sessionUrl;
 @end
 
+enum SDKSessionReplayType : NSInteger;
 enum SDKMaskAutomatic : NSInteger;
 enum SDKLogLevel : NSInteger;
 @class UIView;
@@ -1011,13 +1141,20 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 ///
 /// \param property Account property.
 ///
-/// \param consents Consent with which you want the app to start. If you pass .all all consents will be enabled by default, if you pass .none all consents will be disabled.
+/// \param consents Consent with which you want the app to start. If you pass .all all consents will be enabled by default,
+/// if you pass .none all consents will be disabled.
 ///
 - (void)initializeWithAccount:(NSString * _Nonnull)account property:(NSString * _Nonnull)property consents:(NSArray<NSNumber *> * _Nonnull)consents;
 /// This method set the screen for a new recorder cycle.
 /// \param screen The name of screen.
 ///
 - (void)setWithScreen:(NSString * _Nonnull)screen;
+/// This method set the screen for a new recorder cycle.
+/// \param screen The name of screen.
+///
+/// \param sessionReplayType The type of video recording to session replay.
+///
+- (void)setWithScreen:(NSString * _Nonnull)screen sessionReplayType:(enum SDKSessionReplayType)sessionReplayType;
 /// This method set masking for the current screen.
 /// \param mask Automatic configuration of component mask.
 ///
@@ -1069,11 +1206,11 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 ///
 - (void)maskWithRect:(CGRect)area;
 /// Method to enable consents.
-/// \param consents DecibelCustomerConsentTypes that you want to enable.
+/// \param consents DecibelUserConsent that you want to enable.
 ///
 - (void)setEnableConsents:(NSArray<NSNumber *> * _Nonnull)consents;
 /// Method to disable consents.
-/// \param consents DecibelCustomerConsentTypes that you want to disable.
+/// \param consents DecibelUserConsent that you want to disable.
 ///
 - (void)setDisableConsents:(NSArray<NSNumber *> * _Nonnull)consents;
 /// Method set the log level.
@@ -1101,6 +1238,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) id <SDKSetti
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+/// Enum for enabling or disable consents.
 typedef SWIFT_ENUM(NSInteger, DecibelUserConsent, open) {
   DecibelUserConsentAll = 0,
   DecibelUserConsentRecordingAndTracking = 1,
@@ -1112,36 +1250,121 @@ typedef SWIFT_ENUM(NSInteger, DecibelUserConsent, open) {
 
 
 
+/// Enum for the SDK logs.
 typedef SWIFT_ENUM(NSInteger, SDKLogLevel, open) {
   SDKLogLevelNone = 0,
   SDKLogLevelInfo = 1,
 };
 
+/// Enum for automatic masking components.
+/// <ul>
+///   <li>
+///     <code>.labels</code>: all UILabel fields are masked.
+///   </li>
+///   <li>
+///     <code>.inputs</code>: all UITextField and UITextView fields are masked.
+///   </li>
+///   <li>
+///     <code>.images</code>: all UIImageView will be masked.
+///   </li>
+///   <li>
+///     <code>.webViews</code>: all WKWebView are masked whole view. (no elements inside it).
+///   </li>
+///   <li>
+///     <code>.forms</code>: the view containing the form components must be set to true the
+///     diFormTrack property and these components will be masked automatically.
+///   </li>
+///   <li>
+///     <code>.all</code>: all case masks the rest of the cases (.labels, .inputs and .images).
+///   </li>
+///   <li>
+///     <code>.noMask</code>: no masking anything..
+///   </li>
+/// </ul>
 typedef SWIFT_ENUM(NSInteger, SDKMaskAutomatic, open) {
   SDKMaskAutomaticLabels = 0,
   SDKMaskAutomaticInputs = 1,
   SDKMaskAutomaticImages = 2,
   SDKMaskAutomaticWebViews = 3,
   SDKMaskAutomaticForms = 4,
-  SDKMaskAutomaticFormsContainer = 5,
-  SDKMaskAutomaticAll = 6,
-  SDKMaskAutomaticNoMask = 7,
+  SDKMaskAutomaticAll = 5,
+  SDKMaskAutomaticNoMask = 6,
 };
 
-typedef SWIFT_ENUM(NSInteger, SDKMaskFidelity, open) {
-  SDKMaskFidelityHigh = 0,
-  SDKMaskFidelityLow = 1,
-};
-
+/// Enum for masking or unmasking UIView components. By default is set <code>.automatic</code>.
+/// <ul>
+///   <li>
+///     <code>automatic</code>: mask or unmask depending of automatic masking.
+///   </li>
+///   <li>
+///     <code>mask</code>: mask the <code>UIView</code> that would be not masked automatic.
+///   </li>
+///   <li>
+///     <code>unmask</code>: unmask the <code>UIView</code> that would be masked automatic.
+///   </li>
+/// </ul>
 typedef SWIFT_ENUM(NSInteger, SDKMaskView, open) {
   SDKMaskViewAutomatic = 0,
   SDKMaskViewMask = 1,
   SDKMaskViewUnmask = 2,
 };
 
+/// Defines the behaviour of choosing screens to record or choosing which will not be recorded.
+/// <ul>
+///   <li>
+///     <code>.defineScreensToRecord</code>: this mode will not record any screen by default.
+///     To record a specific screen, it must be defined within the screen that you want to record.
+///   </li>
+///   <li>
+///     <code>.defineScreensToStopRecord</code>: this mode records all screens by default. If it is required not to record a specific screen,
+///     it must be specified on the screen.
+///   </li>
+/// </ul>
 typedef SWIFT_ENUM(NSInteger, SDKRecordingMode, open) {
   SDKRecordingModeDefineScreensToRecord = 0,
   SDKRecordingModeDefineScreensToStopRecord = 1,
+};
+
+/// Defines the behaviour of video recording. There are three modes.
+/// <ul>
+///   <li>
+///     <code>record</code>:  with this option in the main view on a view controller the screen will not be recorded. It is only necessary when
+///     the recordingMode is .defineScreensToStopRecord.
+///   </li>
+///   <li>
+///     <code>noRecord</code>:  with this option in the main view on a view controller the screen will be recorded. It is only necessary when
+///     the recordingMode is .defineScreensToRecord.
+///   </li>
+///   <li>
+///     <code>undefined</code>: this is the default option. This screen will be recorded depending on the value of recordingMode. In the
+///     case of .defineScreensToRecord the screen will not be recorded and with the case of .defineScreensToStopRecord the screen will be recorded.
+///   </li>
+/// </ul>
+typedef SWIFT_ENUM(NSInteger, SDKRecordingScreen, open) {
+  SDKRecordingScreenRecord = 0,
+  SDKRecordingScreenNoRecord = 1,
+  SDKRecordingScreenUndefined = 2,
+};
+
+/// Defines the type of session replay that we want to see from the user. There are three modes:
+/// <ul>
+///   <li>
+///     <code>.hiFi</code>: for this case it will be a replay session with great definition. All components will be recorded.
+///     It is not recommended to use this method in the case of masking some components.
+///   </li>
+///   <li>
+///     <code>.loFi</code>: this mode will record the screen in low fidelity. Not all components will be recorded as shown on the
+///     screen but it can be used to give us an idea of what the screen looks like. This mode is recommended for screens that have some masking.
+///   </li>
+///   <li>
+///     <code>.automatic</code>: in this case the type is selected automatically, being High fidelity in all the screens that do not contain
+///     masks and Low fidelity in those that contain some component to mask.
+///   </li>
+/// </ul>
+typedef SWIFT_ENUM(NSInteger, SDKSessionReplayType, open) {
+  SDKSessionReplayTypeHiFi = 0,
+  SDKSessionReplayTypeLoFi = 1,
+  SDKSessionReplayTypeAutomatic = 2,
 };
 
 
@@ -1150,21 +1373,42 @@ SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 /// Property to change the settings for sending the data. With a true value, the data is sent both by
 /// Wi-Fi and mobile data.
 @property (nonatomic) BOOL mobileDataEnable;
-/// Define the masking behaviour with two possible values <code>.low</code>, <code>.high</code>.
+/// Defines the behaviour of video recording. There are two modes.
 /// note:
-/// <code>.low</code> The video collects more frames, but in some cases the masking may not be perfect.
-/// note:
-/// <code>.high</code> The video quality may be bad in some cases, but the masking would be very reliable.
-@property (nonatomic) enum SDKMaskFidelity maskingFidelity;
-/// Defines the behaviour of video recording. There are 2 modes:
-/// note:
-/// <code>.defineScreensToRecord</code> This mode will not record any screen by default.
-/// To record a specific screen, it must be defined within the screen that you want to record.
-/// note:
-/// <code>.defineScreensToStopRecord</code> This mode records all screens by default. If it is required not to record a specific screen, it must be specified on the screen.
-/// This mode is enabled by default.
+/// <code>.defineScreensToStopRecord</code>: This mode records all screens by default. If it is required not to
+/// record a specific screen, it must be specified on the screen. This mode is enabled by default.
+/// <ul>
+///   <li>
+///     <code>.defineScreensToRecord</code>: This mode will not record any screen by default.
+///     To record a specific screen, it must be defined within the screen that you want to record.
+///   </li>
+/// </ul>
 @property (nonatomic) enum SDKRecordingMode recordingMode;
+/// Defines the type of session replay that we want to see from the user. There are four modes:
+/// <ul>
+///   <li>
+///     <code>.hiFi</code>: For this case it will be a replay session with great definition.
+///     All components will be recorded. It is not recommended to use this method in the case of masking some components.
+///   </li>
+///   <li>
+///     <code>.loFi</code>: This mode will record the screen in low fidelity. Not all components will be recorded as shown
+///     on the screen but it can be used to give us an idea of what the screen looks like.
+///     This mode is recommended for screens that have some masking.
+///   </li>
+///   <li>
+///     <code>.automatic</code>: In this case the type is selected automatically, being High fidelity in all the screens that do not
+///     contain masks and Low fidelity in those that contain some component to mask.
+///   </li>
+/// </ul>
+@property (nonatomic) enum SDKSessionReplayType sessionReplayType;
 @end
+
+
+
+
+
+
+
 
 
 
@@ -1177,8 +1421,10 @@ SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 @interface UIView (SWIFT_EXTENSION(DecibelCore))
 @property (nonatomic) enum SDKMaskView diMasking;
 @property (nonatomic) BOOL diFormTrack;
-@property (nonatomic) BOOL diAddScreenForRecordingMode;
+@property (nonatomic) enum SDKRecordingScreen diAddScreenForRecording;
+@property (nonatomic) enum SDKSessionReplayType diSessionReplayType;
 @end
+
 
 
 

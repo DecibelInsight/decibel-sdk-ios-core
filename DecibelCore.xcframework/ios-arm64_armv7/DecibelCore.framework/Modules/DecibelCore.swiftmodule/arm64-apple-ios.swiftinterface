@@ -6,8 +6,6 @@ import CommonCrypto
 import CoreData
 import Foundation
 import MapKit
-import MetalKit
-import OpenGLES
 import Swift
 import SystemConfiguration
 import UIKit
@@ -40,6 +38,16 @@ import WebKit
     get
   }
 }
+@objc public enum SDKSessionReplayType : Swift.Int {
+  case hiFi
+  case loFi
+  case automatic
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
 @objc public protocol DecibelDelegate : AnyObject {
   @objc func getSessionURL(_ sessionUrl: Swift.String)
 }
@@ -61,9 +69,10 @@ extension NSManagedObject {
   }
   public init?(rawValue: Swift.Int)
 }
-@objc public enum SDKMaskFidelity : Swift.Int {
-  case high
-  case low
+@objc public enum SDKRecordingScreen : Swift.Int {
+  case record
+  case noRecord
+  case undefined
   public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
   public var rawValue: Swift.Int {
@@ -75,6 +84,7 @@ extension NSManagedObject {
   @objc func initialize(account: Swift.String, property: Swift.String)
   @objc func initialize(account: Swift.String, property: Swift.String, consents: [Swift.Int])
   @objc func set(screen: Swift.String)
+  @objc func set(screen: Swift.String, sessionReplayType: DecibelCore.SDKSessionReplayType)
   @objc func setMaskingForCurrentScreen(mask: DecibelCore.SDKMaskAutomatic)
   @objc func send(goal: Swift.String, with value: Swift.Float, currency: DecibelCore.DecibelCurrency)
   @objc func send(goal: Swift.String, with value: Swift.Float)
@@ -285,7 +295,6 @@ extension NSManagedObject {
   case images
   case webViews
   case forms
-  case formsContainer
   case all
   case noMask
   public typealias RawValue = Swift.Int
@@ -303,15 +312,19 @@ extension UIView {
     @objc get
     @objc set
   }
-  @objc dynamic public var diAddScreenForRecordingMode: Swift.Bool {
+  @objc dynamic public var diAddScreenForRecording: DecibelCore.SDKRecordingScreen {
+    @objc get
+    @objc set
+  }
+  @objc dynamic public var diSessionReplayType: DecibelCore.SDKSessionReplayType {
     @objc get
     @objc set
   }
 }
 @objc public protocol SDKSettings : AnyObject {
   @objc var mobileDataEnable: Swift.Bool { get set }
-  @objc var maskingFidelity: DecibelCore.SDKMaskFidelity { get set }
   @objc var recordingMode: DecibelCore.SDKRecordingMode { get set }
+  @objc var sessionReplayType: DecibelCore.SDKSessionReplayType { get set }
 }
 extension DecibelCore.SDKMaskView : Swift.Equatable {}
 extension DecibelCore.SDKMaskView : Swift.Hashable {}
@@ -322,12 +335,15 @@ extension DecibelCore.SDKRecordingMode : Swift.RawRepresentable {}
 extension DecibelCore.SDKLogLevel : Swift.Equatable {}
 extension DecibelCore.SDKLogLevel : Swift.Hashable {}
 extension DecibelCore.SDKLogLevel : Swift.RawRepresentable {}
+extension DecibelCore.SDKSessionReplayType : Swift.Equatable {}
+extension DecibelCore.SDKSessionReplayType : Swift.Hashable {}
+extension DecibelCore.SDKSessionReplayType : Swift.RawRepresentable {}
 extension DecibelCore.DecibelUserConsent : Swift.Equatable {}
 extension DecibelCore.DecibelUserConsent : Swift.Hashable {}
 extension DecibelCore.DecibelUserConsent : Swift.RawRepresentable {}
-extension DecibelCore.SDKMaskFidelity : Swift.Equatable {}
-extension DecibelCore.SDKMaskFidelity : Swift.Hashable {}
-extension DecibelCore.SDKMaskFidelity : Swift.RawRepresentable {}
+extension DecibelCore.SDKRecordingScreen : Swift.Equatable {}
+extension DecibelCore.SDKRecordingScreen : Swift.Hashable {}
+extension DecibelCore.SDKRecordingScreen : Swift.RawRepresentable {}
 extension DecibelCore.DecibelCurrency : Swift.Equatable {}
 extension DecibelCore.DecibelCurrency : Swift.Hashable {}
 extension DecibelCore.DecibelCurrency : Swift.RawRepresentable {}
