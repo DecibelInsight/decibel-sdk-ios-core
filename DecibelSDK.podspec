@@ -8,7 +8,7 @@ s.summary = "DecibelSDK is the core of Decibel"
 #s.requires_arc = true
 
 # 2
-s.version = "1.5.1"
+s.version = "1.5.2"
 
 # 3
 s.license = { :type => "Apache", :file => "LICENSE" }
