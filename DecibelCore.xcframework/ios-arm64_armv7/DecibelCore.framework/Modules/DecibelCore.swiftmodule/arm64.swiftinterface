@@ -38,6 +38,9 @@ import WebKit
     get
   }
 }
+extension DecibelProtocol {
+  public func sendHTTPError(statusCode: Swift.Int)
+}
 @objc public enum SDKSessionReplayType : Swift.Int {
   case hiFi
   case loFi
@@ -84,7 +87,6 @@ extension NSManagedObject {
   @objc func initialize(account: Swift.String, property: Swift.String)
   @objc func initialize(account: Swift.String, property: Swift.String, consents: [Swift.Int])
   @objc func set(screen: Swift.String)
-  @objc func set(screen: Swift.String, sessionReplayType: DecibelCore.SDKSessionReplayType)
   @objc func setMaskingForCurrentScreen(mask: DecibelCore.SDKMaskAutomatic)
   @objc func send(goal: Swift.String, with value: Swift.Float, currency: DecibelCore.DecibelCurrency)
   @objc func send(goal: Swift.String, with value: Swift.Float)
@@ -100,6 +102,11 @@ extension NSManagedObject {
   @objc func setLogLevel(_ level: DecibelCore.SDKLogLevel)
   @objc func formSuccess()
   @objc func formError(error: Swift.String, selector: UIKit.UIView?)
+  @objc func enableSessionForExperience(_ enabled: Swift.Bool)
+  @objc func enableSessionForAnalysis(_ enabled: Swift.Bool)
+  @objc func enableSessionForReplay(_ enabled: Swift.Bool)
+  @objc func enableScreenForAnalysis(_ enabled: Swift.Bool)
+  @objc func getWebViewProperties() -> Swift.String?
 }
 @_inheritsConvenienceInitializers @objc public class DecibelSDK : ObjectiveC.NSObject {
   @objc public static let shared: DecibelCore.DecibelProtocol

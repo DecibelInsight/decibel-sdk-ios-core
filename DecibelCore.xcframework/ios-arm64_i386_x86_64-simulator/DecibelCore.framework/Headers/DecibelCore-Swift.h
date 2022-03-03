@@ -401,7 +401,6 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelDelegate_")
 - (void)getSessionURL:(NSString * _Nonnull)sessionUrl;
 @end
 
-enum SDKSessionReplayType : NSInteger;
 enum SDKMaskAutomatic : NSInteger;
 enum SDKLogLevel : NSInteger;
 @class UIView;
@@ -422,20 +421,13 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 ///
 /// \param property Account property.
 ///
-/// \param consents Consent with which you want the app to start. If you pass .all all consents will be enabled by default,
-/// if you pass .none all consents will be disabled.
+/// \param consents Consent with which you want the app to start. If you pass .all all consents will be enabled by default, if you pass .none all consents will be disabled.
 ///
 - (void)initializeWithAccount:(NSString * _Nonnull)account property:(NSString * _Nonnull)property consents:(NSArray<NSNumber *> * _Nonnull)consents;
 /// This method set the screen for a new recorder cycle.
 /// \param screen The name of screen.
 ///
 - (void)setWithScreen:(NSString * _Nonnull)screen;
-/// This method set the screen for a new recorder cycle.
-/// \param screen The name of screen.
-///
-/// \param sessionReplayType The type of video recording to session replay.
-///
-- (void)setWithScreen:(NSString * _Nonnull)screen sessionReplayType:(enum SDKSessionReplayType)sessionReplayType;
 /// This method set masking for the current screen.
 /// \param mask Automatic configuration of component mask.
 ///
@@ -487,11 +479,11 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 ///
 - (void)maskWithRect:(CGRect)area;
 /// Method to enable consents.
-/// \param consents DecibelUserConsent that you want to enable.
+/// \param consents DecibelCustomerConsentTypes that you want to enable.
 ///
 - (void)setEnableConsents:(NSArray<NSNumber *> * _Nonnull)consents;
 /// Method to disable consents.
-/// \param consents DecibelUserConsent that you want to disable.
+/// \param consents DecibelCustomerConsentTypes that you want to disable.
 ///
 - (void)setDisableConsents:(NSArray<NSNumber *> * _Nonnull)consents;
 /// Method set the log level.
@@ -506,6 +498,24 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 /// \param selector The component that fails.
 ///
 - (void)formErrorWithError:(NSString * _Nonnull)error selector:(UIView * _Nullable)selector;
+/// Add or remove session to get user experience.
+/// \param enabled enable or disable user experience
+///
+- (void)enableSessionForExperience:(BOOL)enabled;
+/// Add or remove sessions to get application data and user interactions.
+/// \param enabled enable or disable application data and user interactions.
+///
+- (void)enableSessionForAnalysis:(BOOL)enabled;
+/// Add or remove session to get session replay.
+/// \param enabled enable or disable session replay.
+///
+- (void)enableSessionForReplay:(BOOL)enabled;
+/// Add or remove screen to get application data and user interactions.
+/// \param enabled enable or disable application data and user interactions.
+///
+- (void)enableScreenForAnalysis:(BOOL)enabled;
+/// Method to get webviews URL properties.
+- (NSString * _Nullable)getWebViewProperties SWIFT_WARN_UNUSED_RESULT;
 @end
 
 @protocol SDKSettings;
@@ -572,18 +582,6 @@ typedef SWIFT_ENUM(NSInteger, SDKMaskAutomatic, open) {
   SDKMaskAutomaticNoMask = 6,
 };
 
-/// Enum for masking or unmasking UIView components. By default is set <code>.automatic</code>.
-/// <ul>
-///   <li>
-///     <code>automatic</code>: mask or unmask depending of automatic masking.
-///   </li>
-///   <li>
-///     <code>mask</code>: mask the <code>UIView</code> that would be not masked automatic.
-///   </li>
-///   <li>
-///     <code>unmask</code>: unmask the <code>UIView</code> that would be masked automatic.
-///   </li>
-/// </ul>
 typedef SWIFT_ENUM(NSInteger, SDKMaskView, open) {
   SDKMaskViewAutomatic = 0,
   SDKMaskViewMask = 1,
@@ -1120,7 +1118,6 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelDelegate_")
 - (void)getSessionURL:(NSString * _Nonnull)sessionUrl;
 @end
 
-enum SDKSessionReplayType : NSInteger;
 enum SDKMaskAutomatic : NSInteger;
 enum SDKLogLevel : NSInteger;
 @class UIView;
@@ -1141,20 +1138,13 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 ///
 /// \param property Account property.
 ///
-/// \param consents Consent with which you want the app to start. If you pass .all all consents will be enabled by default,
-/// if you pass .none all consents will be disabled.
+/// \param consents Consent with which you want the app to start. If you pass .all all consents will be enabled by default, if you pass .none all consents will be disabled.
 ///
 - (void)initializeWithAccount:(NSString * _Nonnull)account property:(NSString * _Nonnull)property consents:(NSArray<NSNumber *> * _Nonnull)consents;
 /// This method set the screen for a new recorder cycle.
 /// \param screen The name of screen.
 ///
 - (void)setWithScreen:(NSString * _Nonnull)screen;
-/// This method set the screen for a new recorder cycle.
-/// \param screen The name of screen.
-///
-/// \param sessionReplayType The type of video recording to session replay.
-///
-- (void)setWithScreen:(NSString * _Nonnull)screen sessionReplayType:(enum SDKSessionReplayType)sessionReplayType;
 /// This method set masking for the current screen.
 /// \param mask Automatic configuration of component mask.
 ///
@@ -1206,11 +1196,11 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 ///
 - (void)maskWithRect:(CGRect)area;
 /// Method to enable consents.
-/// \param consents DecibelUserConsent that you want to enable.
+/// \param consents DecibelCustomerConsentTypes that you want to enable.
 ///
 - (void)setEnableConsents:(NSArray<NSNumber *> * _Nonnull)consents;
 /// Method to disable consents.
-/// \param consents DecibelUserConsent that you want to disable.
+/// \param consents DecibelCustomerConsentTypes that you want to disable.
 ///
 - (void)setDisableConsents:(NSArray<NSNumber *> * _Nonnull)consents;
 /// Method set the log level.
@@ -1225,6 +1215,24 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 /// \param selector The component that fails.
 ///
 - (void)formErrorWithError:(NSString * _Nonnull)error selector:(UIView * _Nullable)selector;
+/// Add or remove session to get user experience.
+/// \param enabled enable or disable user experience
+///
+- (void)enableSessionForExperience:(BOOL)enabled;
+/// Add or remove sessions to get application data and user interactions.
+/// \param enabled enable or disable application data and user interactions.
+///
+- (void)enableSessionForAnalysis:(BOOL)enabled;
+/// Add or remove session to get session replay.
+/// \param enabled enable or disable session replay.
+///
+- (void)enableSessionForReplay:(BOOL)enabled;
+/// Add or remove screen to get application data and user interactions.
+/// \param enabled enable or disable application data and user interactions.
+///
+- (void)enableScreenForAnalysis:(BOOL)enabled;
+/// Method to get webviews URL properties.
+- (NSString * _Nullable)getWebViewProperties SWIFT_WARN_UNUSED_RESULT;
 @end
 
 @protocol SDKSettings;
@@ -1291,18 +1299,6 @@ typedef SWIFT_ENUM(NSInteger, SDKMaskAutomatic, open) {
   SDKMaskAutomaticNoMask = 6,
 };
 
-/// Enum for masking or unmasking UIView components. By default is set <code>.automatic</code>.
-/// <ul>
-///   <li>
-///     <code>automatic</code>: mask or unmask depending of automatic masking.
-///   </li>
-///   <li>
-///     <code>mask</code>: mask the <code>UIView</code> that would be not masked automatic.
-///   </li>
-///   <li>
-///     <code>unmask</code>: unmask the <code>UIView</code> that would be masked automatic.
-///   </li>
-/// </ul>
 typedef SWIFT_ENUM(NSInteger, SDKMaskView, open) {
   SDKMaskViewAutomatic = 0,
   SDKMaskViewMask = 1,
@@ -1839,7 +1835,6 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelDelegate_")
 - (void)getSessionURL:(NSString * _Nonnull)sessionUrl;
 @end
 
-enum SDKSessionReplayType : NSInteger;
 enum SDKMaskAutomatic : NSInteger;
 enum SDKLogLevel : NSInteger;
 @class UIView;
@@ -1860,20 +1855,13 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 ///
 /// \param property Account property.
 ///
-/// \param consents Consent with which you want the app to start. If you pass .all all consents will be enabled by default,
-/// if you pass .none all consents will be disabled.
+/// \param consents Consent with which you want the app to start. If you pass .all all consents will be enabled by default, if you pass .none all consents will be disabled.
 ///
 - (void)initializeWithAccount:(NSString * _Nonnull)account property:(NSString * _Nonnull)property consents:(NSArray<NSNumber *> * _Nonnull)consents;
 /// This method set the screen for a new recorder cycle.
 /// \param screen The name of screen.
 ///
 - (void)setWithScreen:(NSString * _Nonnull)screen;
-/// This method set the screen for a new recorder cycle.
-/// \param screen The name of screen.
-///
-/// \param sessionReplayType The type of video recording to session replay.
-///
-- (void)setWithScreen:(NSString * _Nonnull)screen sessionReplayType:(enum SDKSessionReplayType)sessionReplayType;
 /// This method set masking for the current screen.
 /// \param mask Automatic configuration of component mask.
 ///
@@ -1925,11 +1913,11 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 ///
 - (void)maskWithRect:(CGRect)area;
 /// Method to enable consents.
-/// \param consents DecibelUserConsent that you want to enable.
+/// \param consents DecibelCustomerConsentTypes that you want to enable.
 ///
 - (void)setEnableConsents:(NSArray<NSNumber *> * _Nonnull)consents;
 /// Method to disable consents.
-/// \param consents DecibelUserConsent that you want to disable.
+/// \param consents DecibelCustomerConsentTypes that you want to disable.
 ///
 - (void)setDisableConsents:(NSArray<NSNumber *> * _Nonnull)consents;
 /// Method set the log level.
@@ -1944,6 +1932,24 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 /// \param selector The component that fails.
 ///
 - (void)formErrorWithError:(NSString * _Nonnull)error selector:(UIView * _Nullable)selector;
+/// Add or remove session to get user experience.
+/// \param enabled enable or disable user experience
+///
+- (void)enableSessionForExperience:(BOOL)enabled;
+/// Add or remove sessions to get application data and user interactions.
+/// \param enabled enable or disable application data and user interactions.
+///
+- (void)enableSessionForAnalysis:(BOOL)enabled;
+/// Add or remove session to get session replay.
+/// \param enabled enable or disable session replay.
+///
+- (void)enableSessionForReplay:(BOOL)enabled;
+/// Add or remove screen to get application data and user interactions.
+/// \param enabled enable or disable application data and user interactions.
+///
+- (void)enableScreenForAnalysis:(BOOL)enabled;
+/// Method to get webviews URL properties.
+- (NSString * _Nullable)getWebViewProperties SWIFT_WARN_UNUSED_RESULT;
 @end
 
 @protocol SDKSettings;
@@ -2010,18 +2016,6 @@ typedef SWIFT_ENUM(NSInteger, SDKMaskAutomatic, open) {
   SDKMaskAutomaticNoMask = 6,
 };
 
-/// Enum for masking or unmasking UIView components. By default is set <code>.automatic</code>.
-/// <ul>
-///   <li>
-///     <code>automatic</code>: mask or unmask depending of automatic masking.
-///   </li>
-///   <li>
-///     <code>mask</code>: mask the <code>UIView</code> that would be not masked automatic.
-///   </li>
-///   <li>
-///     <code>unmask</code>: unmask the <code>UIView</code> that would be masked automatic.
-///   </li>
-/// </ul>
 typedef SWIFT_ENUM(NSInteger, SDKMaskView, open) {
   SDKMaskViewAutomatic = 0,
   SDKMaskViewMask = 1,
