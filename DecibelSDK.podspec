@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
 # 1
 s.platform = :ios
-s.ios.deployment_target = '10.3'
+s.ios.deployment_target = '11'
 s.name = "DecibelSDK"
 s.summary = "DecibelSDK is the core of Decibel"
 #s.requires_arc = true
