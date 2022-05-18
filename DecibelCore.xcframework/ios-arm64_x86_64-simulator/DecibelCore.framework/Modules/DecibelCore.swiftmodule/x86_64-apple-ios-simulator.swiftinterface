@@ -356,6 +356,7 @@ extension UIView {
 }
 @objc public protocol SDKSettings : AnyObject {
   @objc var mobileDataEnable: Swift.Bool { get set }
+  @objc var crashReporterEnable: Swift.Bool { get set }
   @objc var recordingMode: DecibelCore.SDKRecordingMode { get set }
   @objc var sessionReplayType: DecibelCore.SDKSessionReplayType { get set }
 }

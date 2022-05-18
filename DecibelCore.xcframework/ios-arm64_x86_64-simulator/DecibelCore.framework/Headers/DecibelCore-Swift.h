@@ -664,6 +664,8 @@ SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 /// Property to change the settings for sending the data. With a true value, the data is sent both by
 /// Wi-Fi and mobile data.
 @property (nonatomic) BOOL mobileDataEnable;
+/// Enable/Disable Crash Reporter feature.
+@property (nonatomic) BOOL crashReporterEnable;
 /// Defines the behaviour of video recording. There are two modes.
 /// note:
 /// <code>.defineScreensToStopRecord</code>: This mode records all screens by default. If it is required not to
@@ -1398,6 +1400,8 @@ SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 /// Property to change the settings for sending the data. With a true value, the data is sent both by
 /// Wi-Fi and mobile data.
 @property (nonatomic) BOOL mobileDataEnable;
+/// Enable/Disable Crash Reporter feature.
+@property (nonatomic) BOOL crashReporterEnable;
 /// Defines the behaviour of video recording. There are two modes.
 /// note:
 /// <code>.defineScreensToStopRecord</code>: This mode records all screens by default. If it is required not to
