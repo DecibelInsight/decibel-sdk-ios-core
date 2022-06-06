@@ -1,6 +1,6 @@
 # DecibelSDK Specs
 
-### Requierements
+### Requirements
 
 DecibelSDK is developed with the Swift 5 language and is compatible with iOS 11 and later versions.
 
