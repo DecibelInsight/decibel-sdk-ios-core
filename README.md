@@ -2,7 +2,7 @@
 
 ### Requierements
 
-DecibelSDK is developed with the Swift 5 language and is compatible with iOS 10.3 and later versions.
+DecibelSDK is developed with the Swift 5 language and is compatible with iOS 11 and later versions.
 
 ### Integration
 
@@ -19,7 +19,7 @@ end
 ```
 ### Initialization
 
-To initialize DecibelSDK in your app, you must call the initialise method in didFinishLaunchingWithOptions method of your application class.
+To initialize DecibelSDK in your app, you must call the initialize method in didFinishLaunchingWithOptions method of your application class.
 
 ```Swift
 import DecibelCore
