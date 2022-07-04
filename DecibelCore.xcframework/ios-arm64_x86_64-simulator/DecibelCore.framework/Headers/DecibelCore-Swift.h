@@ -516,6 +516,10 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 - (void)enableScreenForAnalysis:(BOOL)enabled;
 /// Method to get webviews URL properties.
 - (NSString * _Nullable)getWebViewProperties SWIFT_WARN_UNUSED_RESULT;
+/// Method to submit an error in the HTTP requests.
+/// \param error Error code.
+///
+- (void)sendHTTPErrorWithStatusCode:(NSInteger)statusCode;
 @end
 
 @protocol SDKSettings;
@@ -1252,6 +1256,10 @@ SWIFT_PROTOCOL("_TtP11DecibelCore15DecibelProtocol_")
 - (void)enableScreenForAnalysis:(BOOL)enabled;
 /// Method to get webviews URL properties.
 - (NSString * _Nullable)getWebViewProperties SWIFT_WARN_UNUSED_RESULT;
+/// Method to submit an error in the HTTP requests.
+/// \param error Error code.
+///
+- (void)sendHTTPErrorWithStatusCode:(NSInteger)statusCode;
 @end
 
 @protocol SDKSettings;

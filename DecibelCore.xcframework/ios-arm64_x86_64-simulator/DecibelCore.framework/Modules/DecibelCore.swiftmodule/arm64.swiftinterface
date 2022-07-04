@@ -21,6 +21,11 @@ import WebKit
     get
   }
 }
+@objc public class SDKMultiPlatform : ObjectiveC.NSObject {
+  public init(type: DecibelCore.SDKPlatformType, version: Swift.String, language: Swift.String)
+  @objc deinit
+  @objc override dynamic public init()
+}
 @objc public enum SDKRecordingMode : Swift.Int {
   case defineScreensToRecord
   case defineScreensToStopRecord
@@ -39,9 +44,6 @@ import WebKit
     get
   }
 }
-extension DecibelProtocol {
-  public func sendHTTPError(statusCode: Swift.Int)
-}
 @objc public enum SDKSessionReplayType : Swift.Int {
   case hiFi
   case loFi
@@ -54,15 +56,6 @@ extension DecibelProtocol {
 }
 @objc public protocol DecibelDelegate : AnyObject {
   @objc func getSessionURL(_ sessionUrl: Swift.String)
-}
-@objc public enum SDKPlatformType : Swift.Int {
-  case flutter
-  case xamarin
-  public typealias RawValue = Swift.Int
-  public init?(rawValue: Swift.Int)
-  public var rawValue: Swift.Int {
-    get
-  }
 }
 extension NSManagedObject {
   open class func first(on context: CoreData.NSManagedObjectContext?, with fetchRequest: CoreData.NSFetchRequest<CoreData.NSManagedObject>?) -> CoreData.NSManagedObject?
@@ -97,6 +90,15 @@ extension UIViewController {
     get
   }
   public init?(rawValue: Swift.Int)
+}
+@objc public enum SDKPlatformType : Swift.Int {
+  case flutter
+  case xamarin
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
 }
 @objc public enum SDKRecordingScreen : Swift.Int {
   case record
@@ -133,6 +135,7 @@ extension UIViewController {
   @objc func enableSessionForReplay(_ enabled: Swift.Bool)
   @objc func enableScreenForAnalysis(_ enabled: Swift.Bool)
   @objc func getWebViewProperties() -> Swift.String?
+  @objc func sendHTTPError(statusCode: Swift.Int)
 }
 @_inheritsConvenienceInitializers @objc public class DecibelSDK : ObjectiveC.NSObject {
   @objc public static let shared: DecibelCore.DecibelProtocol
@@ -360,11 +363,6 @@ extension UIView {
   @objc var recordingMode: DecibelCore.SDKRecordingMode { get set }
   @objc var sessionReplayType: DecibelCore.SDKSessionReplayType { get set }
 }
-@objc public class SDKMultiPlatform : ObjectiveC.NSObject {
-  public init(type: DecibelCore.SDKPlatformType, version: Swift.String, language: Swift.String)
-  @objc deinit
-  @objc override dynamic public init()
-}
 extension DecibelCore.SDKMaskView : Swift.Equatable {}
 extension DecibelCore.SDKMaskView : Swift.Hashable {}
 extension DecibelCore.SDKMaskView : Swift.RawRepresentable {}
@@ -377,12 +375,12 @@ extension DecibelCore.SDKLogLevel : Swift.RawRepresentable {}
 extension DecibelCore.SDKSessionReplayType : Swift.Equatable {}
 extension DecibelCore.SDKSessionReplayType : Swift.Hashable {}
 extension DecibelCore.SDKSessionReplayType : Swift.RawRepresentable {}
-extension DecibelCore.SDKPlatformType : Swift.Equatable {}
-extension DecibelCore.SDKPlatformType : Swift.Hashable {}
-extension DecibelCore.SDKPlatformType : Swift.RawRepresentable {}
 extension DecibelCore.DecibelUserConsent : Swift.Equatable {}
 extension DecibelCore.DecibelUserConsent : Swift.Hashable {}
 extension DecibelCore.DecibelUserConsent : Swift.RawRepresentable {}
+extension DecibelCore.SDKPlatformType : Swift.Equatable {}
+extension DecibelCore.SDKPlatformType : Swift.Hashable {}
+extension DecibelCore.SDKPlatformType : Swift.RawRepresentable {}
 extension DecibelCore.SDKRecordingScreen : Swift.Equatable {}
 extension DecibelCore.SDKRecordingScreen : Swift.Hashable {}
 extension DecibelCore.SDKRecordingScreen : Swift.RawRepresentable {}
