@@ -38,7 +38,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		2iaF3Iy1iMhrfOVj05/cueirhl8=
+		OrYzOiJiKMnjw0J/IjPgAchz3FE=
 		</data>
 		<key>Migration1to2.cdm</key>
 		<data>
@@ -62,7 +62,7 @@
 		</data>
 		<key>Modules/DecibelCore.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		fHsCTSwRXCzyDJr/XTt9Oqi0Pkg=
+		8TidHJ7WPaWj3GHNUVA9YOkWIxY=
 		</data>
 		<key>Modules/DecibelCore.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -74,7 +74,7 @@
 		</data>
 		<key>Modules/DecibelCore.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		fHsCTSwRXCzyDJr/XTt9Oqi0Pkg=
+		8TidHJ7WPaWj3GHNUVA9YOkWIxY=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -178,7 +178,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			DjR6RcYYGn3M7bEO9WSO5acfXPwixFwVYnjYC5E33sA=
+			yr5jL+48ycJVZ1M1C8akKi35uJ+A9j0zAHe9/WIu1XM=
 			</data>
 		</dict>
 		<key>Modules/DecibelCore.swiftmodule/arm64.swiftdoc</key>
@@ -199,7 +199,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			DjR6RcYYGn3M7bEO9WSO5acfXPwixFwVYnjYC5E33sA=
+			yr5jL+48ycJVZ1M1C8akKi35uJ+A9j0zAHe9/WIu1XM=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
