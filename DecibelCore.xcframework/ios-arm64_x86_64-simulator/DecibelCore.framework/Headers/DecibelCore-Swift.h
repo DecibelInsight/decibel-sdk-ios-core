@@ -566,24 +566,41 @@ typedef SWIFT_ENUM(NSInteger, SDKLogLevel, open) {
 ///     <code>.webViews</code>: all WKWebView are masked whole view. (no elements inside it).
 ///   </li>
 ///   <li>
-///     <code>.forms</code>: the view containing the form components must be set to true the
-///     diFormTrack property and these components will be masked automatically.
+///     <code>.forms</code>: the view containing the form components must be set to true the diFormTrack property and these components will be masked automatically.
 ///   </li>
 ///   <li>
 ///     <code>.all</code>: all case masks the rest of the cases (.labels, .inputs and .images).
 ///   </li>
 ///   <li>
-///     <code>.noMask</code>: no masking anything..
+///     <code>.noMask</code>: no masking anything.
+///   </li>
+///   <li>
+///     <code>.unmaskInputs</code>: The Inputs are masking by default, with this option you can unmask all.
+///   </li>
+///   <li>
+///     <code>.unmaskWebViews</code>: The WebView are masking by default, with this option you can unmask all.
 ///   </li>
 /// </ul>
 typedef SWIFT_ENUM(NSInteger, SDKMaskAutomatic, open) {
+/// All UILabel fields are masked
   SDKMaskAutomaticLabels = 0,
+/// All UITextField and UITextView fields are masked, it’s masking by defdault.
   SDKMaskAutomaticInputs = 1,
+/// All UIImageView will be masked.
   SDKMaskAutomaticImages = 2,
+/// All WKWebView are masked whole view. (no elements inside it), it’s masking by defdault.
   SDKMaskAutomaticWebViews = 3,
+/// The view containing the form components must be set to true the
+/// diFormTrack property and these components will be masked automatically.
   SDKMaskAutomaticForms = 4,
+/// All case masks the rest of the cases (.labels, .inputs and .images).
   SDKMaskAutomaticAll = 5,
+/// No masking anything.
   SDKMaskAutomaticNoMask = 6,
+/// The Inputs are masking by default, with this option you can unmask all.
+  SDKMaskAutomaticUnmaskInputs = 7,
+/// The WebView are masking by default, with this option you can unmask all.
+  SDKMaskAutomaticUnmaskWebViews = 8,
 };
 
 typedef SWIFT_ENUM(NSInteger, SDKMaskView, open) {
@@ -699,7 +716,6 @@ SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 /// </ul>
 @property (nonatomic) enum SDKSessionReplayType sessionReplayType;
 @end
-
 
 
 
@@ -1306,24 +1322,41 @@ typedef SWIFT_ENUM(NSInteger, SDKLogLevel, open) {
 ///     <code>.webViews</code>: all WKWebView are masked whole view. (no elements inside it).
 ///   </li>
 ///   <li>
-///     <code>.forms</code>: the view containing the form components must be set to true the
-///     diFormTrack property and these components will be masked automatically.
+///     <code>.forms</code>: the view containing the form components must be set to true the diFormTrack property and these components will be masked automatically.
 ///   </li>
 ///   <li>
 ///     <code>.all</code>: all case masks the rest of the cases (.labels, .inputs and .images).
 ///   </li>
 ///   <li>
-///     <code>.noMask</code>: no masking anything..
+///     <code>.noMask</code>: no masking anything.
+///   </li>
+///   <li>
+///     <code>.unmaskInputs</code>: The Inputs are masking by default, with this option you can unmask all.
+///   </li>
+///   <li>
+///     <code>.unmaskWebViews</code>: The WebView are masking by default, with this option you can unmask all.
 ///   </li>
 /// </ul>
 typedef SWIFT_ENUM(NSInteger, SDKMaskAutomatic, open) {
+/// All UILabel fields are masked
   SDKMaskAutomaticLabels = 0,
+/// All UITextField and UITextView fields are masked, it’s masking by defdault.
   SDKMaskAutomaticInputs = 1,
+/// All UIImageView will be masked.
   SDKMaskAutomaticImages = 2,
+/// All WKWebView are masked whole view. (no elements inside it), it’s masking by defdault.
   SDKMaskAutomaticWebViews = 3,
+/// The view containing the form components must be set to true the
+/// diFormTrack property and these components will be masked automatically.
   SDKMaskAutomaticForms = 4,
+/// All case masks the rest of the cases (.labels, .inputs and .images).
   SDKMaskAutomaticAll = 5,
+/// No masking anything.
   SDKMaskAutomaticNoMask = 6,
+/// The Inputs are masking by default, with this option you can unmask all.
+  SDKMaskAutomaticUnmaskInputs = 7,
+/// The WebView are masking by default, with this option you can unmask all.
+  SDKMaskAutomaticUnmaskWebViews = 8,
 };
 
 typedef SWIFT_ENUM(NSInteger, SDKMaskView, open) {
@@ -1439,7 +1472,6 @@ SWIFT_PROTOCOL("_TtP11DecibelCore11SDKSettings_")
 /// </ul>
 @property (nonatomic) enum SDKSessionReplayType sessionReplayType;
 @end
-
 
 
 

@@ -333,6 +333,8 @@ extension UIViewController {
   case forms
   case all
   case noMask
+  case unmaskInputs
+  case unmaskWebViews
   public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
   public var rawValue: Swift.Int {
